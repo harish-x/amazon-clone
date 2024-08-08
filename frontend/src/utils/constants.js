@@ -1,0 +1,17 @@
+export const Navlist = [
+  "Fresh",
+  "Amazon miniTV",
+  "Sell",
+  "Best Seller",
+  "Today's Deals",
+  "Mobiles",
+  "Prime",
+  "Customer Serivice",
+  "Electronics",
+  "Fashion",
+  "New Releases",
+  "Home & Kitchen",
+  "Amazon Pay",
+  "Computers",
+  "Books",
+];
