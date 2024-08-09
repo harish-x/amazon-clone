@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   ban5,
   Gff,
@@ -20,7 +20,6 @@ import { ban6 } from "../utils";
 const Sliders = () => {
   const [imgIndex, setImgIndex] = useState(0);
   const sliderimages = [ban1, ban2, ban3, ban4, ban5, ban6];
-  const imgRef = useRef();
 
   const prevImg = () => {
     setImgIndex((index) => {
@@ -35,8 +34,6 @@ const Sliders = () => {
       return index + 1;
     });
   };
-  console.log(import.meta.env.VITE_BASE_URL);
-  
 
   return (
     <div className="h-auto">

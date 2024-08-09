@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Navlist} from '../utils/constants'
+import { Navlist } from "../utils/constants";
 import {
   amazon_cart,
   amazon_location,
@@ -8,7 +8,6 @@ import {
   empty_cart,
 } from "../utils";
 
-
 const Navbar = () => {
   const [screen, setScreen] = useState(true);
 
@@ -16,7 +15,7 @@ const Navbar = () => {
     if (window.innerWidth < 1060) {
       setScreen(false);
     }
-    return window.removeEventListener("resize");
+  
   });
   return (
     <section>
@@ -93,7 +92,7 @@ const Navbar = () => {
       <div className="bg-secondary scroll-container overflow-auto whitespace-nowrap py-2 flex  ">
         {Navlist.map((data) => {
           return (
-            <ul className="text-white  px-2">
+            <ul key={data} className="text-white  px-2">
               <li>{data}</li>
             </ul>
           );

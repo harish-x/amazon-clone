@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const imgs = [
   "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
@@ -14,10 +15,7 @@ const imgs = [
 ];
 
 const Products = () => {
-  const { allproducts } = useSelector(
-    (state) => state.productsState
-  );
- 
+  const { allproducts } = useSelector((state) => state.productsState);
 
   return (
     <section className="mt-[5%] bg-white">
@@ -27,19 +25,21 @@ const Products = () => {
 
           <div className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:gap-x-6">
             {allproducts?.message?.map((product, index) => (
-              <div key={product.id} className="group">
-                <div className="aspect-h-1 aspect-w-1 w-3/4 overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                  <img
-                    alt="ferf"
-                    src={imgs[index]}
-                    className="h-full w-full object-cover object-center group-hover:opacity-75"
-                  />
+              <Link key={index} to={`/product/${product._id}`}>
+                <div className="group">
+                  <div className="aspect-h-1 aspect-w-1 w-3/4 overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                    <img
+                      alt="ferf"
+                      src={imgs[index]}
+                      className="h-full w-full object-cover object-center group-hover:opacity-75"
+                    />
+                  </div>
+                  <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
+                  <p className="mt-1 text-lg font-medium text-gray-900">
+                    {product.price}
+                  </p>
                 </div>
-                <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
-                <p className="mt-1 text-lg font-medium text-gray-900">
-                  {product.price}
-                </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
