@@ -7,6 +7,7 @@ import {
   amazon_search,
   empty_cart,
 } from "../utils";
+import Search from "./search/Search";
 
 const Navbar = () => {
   const [screen, setScreen] = useState(true);
@@ -35,23 +36,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className=" items-center hidden ss:flex flex-grow">
-          <div className="flex items-center w-full h-10">
-            <div className="bg-gray-300 px-3 h-full flex rounded-l-md items-center">
-              <span className="text-gray-700">All</span>
-            </div>
-            <div className="h-full flex-grow">
-              <input
-                type="text"
-                className="h-full w-full px-2"
-                placeholder="Search Amazon.in"
-              />
-            </div>
-            <div className="w-8 bg-amazonYellow flex items-center h-full rounded-r-md">
-              <img src={amazon_search} width="100%" alt="" />
-            </div>
-          </div>
-        </div>
+        <Search/>
         {screen ? (
           <div className="items-center justify-between hidden md:flex">
             <div className="flex items-center px-3">

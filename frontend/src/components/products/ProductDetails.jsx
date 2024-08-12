@@ -4,6 +4,7 @@ import { getProduct } from "../../features/ProductFeature";
 import { useParams } from "react-router-dom";
 import Spinner from "../spinner/Spinner";
 import toast from "react-hot-toast";
+import MetaData from "../MetaData";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const ProductDetails = () => {
         <Spinner />
       ) : status === "success" ? (
         <div className="bg-white">
+          <MetaData title={product?.product?.name} />
           <div className="pt-6">
             <nav aria-label="Breadcrumb">
               <ol

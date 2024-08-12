@@ -5,14 +5,20 @@ const BASEURL = import.meta.env.VITE_BASE_URL;
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
-  async (_, { rejectWithValue }) => {
+  async (pageNo, { rejectWithValue }) => {
+   
+    // console.log( page );
+    
+    // const { pageNo, currentPage } = page;
+    let nthpage = pageNo ? pageNo : 1;
     try {
-      const res = await axios.get(
-        BASEURL + import.meta.env.VITE_GET_ALL_PRODUCTS
+      const res = await axios.get(`
+        ${BASEURL}${import.meta.env.VITE_GET_ALL_PRODUCTS}?page=${nthpage}`
       );
       return res.data;
     } catch (err) {
-      return rejectWithValue(err.response ? err.response.data : err.message);
+       console.log(page);
+      return rejectWithValue(err.response ? err.response.message : err.message);
     }
   }
 );

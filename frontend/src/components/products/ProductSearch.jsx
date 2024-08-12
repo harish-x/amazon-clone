@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "react-js-pagination";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getProducts } from "../../features/ProductsFeatures";
 
 const imgs = [
@@ -16,17 +16,18 @@ const imgs = [
   "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-08.jpg",
 ];
 
-const Products = () => {
+const ProductSearch = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProducts(currentPage));
-  }, []);
-
+  const {keyword} = useParams()
   const { allproducts, productCount, resPerPage } = useSelector(
     (state) => state.productsState
   );
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    dispatch(getProducts(keyword, currentPage));
+  }, [currentPage,keyword]);
+
   const setCurrentPagenum = (pageNo) => {
     setCurrentPage(pageNo);
     dispatch(getProducts(pageNo));
@@ -36,7 +37,7 @@ const Products = () => {
     <section className="mt-[5%] bg-white">
       <div>
         <div className="mx-auto max-w-2xl px-4 py-16 xs:px-6 ss:py-24 sm:max-w-7xl md:px-8">
-          <h2 className="sr-only">Products</h2>
+          <h2 className="sr-only">Search Products</h2>
 
           <div className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:gap-x-6">
             {allproducts?.message?.map((product, index) => (
@@ -74,7 +75,8 @@ const Products = () => {
         )}
       </div>
     </section>
+
   );
 };
 
-export default Products;
+export default ProductSearch;

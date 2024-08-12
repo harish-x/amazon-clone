@@ -11,9 +11,10 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
     .filter()
     .paginate(resPerPage);
   const products = await apiFeatures.query;
+  const totalProductsCount = await ProductModel.countDocuments({});
   res
     .status(200)
-    .json({ success: true, count: products.length, message: products });
+    .json({ success: true, count: totalProductsCount,resPerPage, message: products });
 });
 
 exports.newProducts = catchAsyncError(async (req, res, next) => {
@@ -131,12 +132,11 @@ exports.deleteReview = catchAsyncError(async (req, res, next) => {
     }, 0) / reviews.length;
 
   ratings = isNaN(ratings) ? 0 : ratings;
-  await ProductModel.findByIdAndUpdate(
-    req.query.productId,
-    {reviews,
+  await ProductModel.findByIdAndUpdate(req.query.productId, {
+    reviews,
     numOfReviews,
-    ratings}
-  );
+    ratings,
+  });
 
   res.status(200).json({
     success: true,
