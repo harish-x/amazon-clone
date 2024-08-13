@@ -5,19 +5,24 @@ const BASEURL = import.meta.env.VITE_BASE_URL;
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
-  async (pageNo, { rejectWithValue }) => {
-   
-    // console.log( page );
-    
+  async ({ pageNo, currentPage, keyword }, { rejectWithValue }) => {
+    console.log({ pageNo, currentPage, keyword });
+
     // const { pageNo, currentPage } = page;
-    let nthpage = pageNo ? pageNo : 1;
+    let nthpage = pageNo ? pageNo : currentPage;
+    let link = `
+        ${BASEURL}${import.meta.env.VITE_GET_ALL_PRODUCTS}?page=${nthpage}${
+      keyword !== "undefined" && keyword !== undefined
+        ? `&keyword=${keyword}`
+        : ""
+    }`;
+    console.log(link);
+
     try {
-      const res = await axios.get(`
-        ${BASEURL}${import.meta.env.VITE_GET_ALL_PRODUCTS}?page=${nthpage}`
-      );
+      const res = await axios.get(link);
       return res.data;
     } catch (err) {
-       console.log(page);
+      console.log(page);
       return rejectWithValue(err.response ? err.response.message : err.message);
     }
   }

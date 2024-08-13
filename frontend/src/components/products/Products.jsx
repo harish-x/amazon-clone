@@ -20,7 +20,7 @@ const Products = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProducts(currentPage));
+    dispatch(getProducts({currentPage}));
   }, []);
 
   const { allproducts, productCount, resPerPage } = useSelector(
@@ -29,7 +29,7 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const setCurrentPagenum = (pageNo) => {
     setCurrentPage(pageNo);
-    dispatch(getProducts(pageNo));
+    dispatch(getProducts({pageNo}));
   };
 
   return (

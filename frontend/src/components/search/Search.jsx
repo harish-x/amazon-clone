@@ -18,7 +18,7 @@ const Search = () => {
         <div className="h-full flex-grow">
           <input
             type="text"
-            className="h-full w-full px-2"
+            className="h-full w-full px-2 text-black"
             placeholder="Search Amazon.in"
             onChange={(e) => setSearchTxt(e.target.value)}
             value={searchTxt}

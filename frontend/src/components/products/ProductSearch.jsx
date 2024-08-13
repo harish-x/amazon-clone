@@ -4,6 +4,10 @@ import Pagination from "react-js-pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getProducts } from "../../features/ProductsFeatures";
+import Slider from "rc-slider";
+import Tooltip from "rc-tooltip";
+import "rc-slider/assets/index.css";
+import "rc-tooltip/assets/bootstrap.css";
 
 const imgs = [
   "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
@@ -18,15 +22,16 @@ const imgs = [
 
 const ProductSearch = () => {
   const dispatch = useDispatch();
-  const {keyword} = useParams()
+  const { keyword } = useParams();
   const { allproducts, productCount, resPerPage } = useSelector(
     (state) => state.productsState
   );
   const [currentPage, setCurrentPage] = useState(1);
+  const  [price,setPrice] = useState([1,1000])
 
   useEffect(() => {
-    dispatch(getProducts(keyword, currentPage));
-  }, [currentPage,keyword]);
+    dispatch(getProducts({ keyword, currentPage }));
+  }, [currentPage, keyword,price]);
 
   const setCurrentPagenum = (pageNo) => {
     setCurrentPage(pageNo);
@@ -35,10 +40,29 @@ const ProductSearch = () => {
 
   return (
     <section className="mt-[5%] bg-white">
+      <h2 className="text-center text-3xl">{keyword}</h2>
       <div>
+        <div className="px-5">
+          <Slider
+            range={true}
+            marks={{ 1: "1$", 1000: "$1000" }}
+            min={1}
+            max={1000}
+            defaultValue={price}
+             onChange={(val)=>{
+              setPrice(val)
+             }}
+            handleRender={(renderProps) => {
+              return (
+                <Tooltip overlay={`$ ${renderProps.props["aria-valuenow"]}`}>
+                  {renderProps}
+                </Tooltip>
+              );
+            }}
+          />
+          {price}
+        </div>
         <div className="mx-auto max-w-2xl px-4 py-16 xs:px-6 ss:py-24 sm:max-w-7xl md:px-8">
-          <h2 className="sr-only">Search Products</h2>
-
           <div className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:gap-x-6">
             {allproducts?.message?.map((product, index) => (
               <Link key={index} to={`/product/${product._id}`}>
@@ -75,7 +99,6 @@ const ProductSearch = () => {
         )}
       </div>
     </section>
-
   );
 };
 

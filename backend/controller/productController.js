@@ -6,15 +6,25 @@ const { Mongoose } = require("mongoose");
 
 exports.getProducts = catchAsyncError(async (req, res, next) => {
   const resPerPage = 2;
-  const apiFeatures = new ApiFeatures(ProductModel.find(), req.query)
-    .search()
-    .filter()
-    .paginate(resPerPage);
-  const products = await apiFeatures.query;
+  
+  let buildQuery =()=>{
+    return new ApiFeatures(ProductModel.find(), req.query).search().filter();
+  }
+  const filteredProductsCount = await buildQuery().query.countDocuments({})
+  const products = await buildQuery().paginate(resPerPage).query
   const totalProductsCount = await ProductModel.countDocuments({});
+  let productsCount = totalProductsCount;
+  if(filteredProductsCount !== totalProductsCount){
+    productsCount = filteredProductsCount
+  }
   res
     .status(200)
-    .json({ success: true, count: totalProductsCount,resPerPage, message: products });
+    .json({
+      success: true,
+      count: productsCount,
+      resPerPage,
+      message: products,
+    });
 });
 
 exports.newProducts = catchAsyncError(async (req, res, next) => {
