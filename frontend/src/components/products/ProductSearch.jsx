@@ -8,6 +8,7 @@ import Slider from "rc-slider";
 import Tooltip from "rc-tooltip";
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
+import { categories } from "../../utils/constants";
 
 const imgs = [
   "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
@@ -27,11 +28,13 @@ const ProductSearch = () => {
     (state) => state.productsState
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const  [price,setPrice] = useState([1,1000])
+  const [price, setPrice] = useState([1, 1000]);
+  const [fetchPrice, setFetchPrice] = useState([]);
+  const [category, setCategory] = useState(null);
 
   useEffect(() => {
-    dispatch(getProducts({ keyword, currentPage }));
-  }, [currentPage, keyword,price]);
+    dispatch(getProducts({ keyword, currentPage, fetchPrice,category }));
+  }, [currentPage, keyword, fetchPrice,category]);
 
   const setCurrentPagenum = (pageNo) => {
     setCurrentPage(pageNo);
@@ -42,16 +45,18 @@ const ProductSearch = () => {
     <section className="mt-[5%] bg-white">
       <h2 className="text-center text-3xl">{keyword}</h2>
       <div>
-        <div className="px-5">
+        <div className="w-1/3 px-5 mt-5">
           <Slider
             range={true}
             marks={{ 1: "1$", 1000: "$1000" }}
             min={1}
             max={1000}
+            dots={true}
+            className="bg-gray border-x-emerald-950"
             defaultValue={price}
-             onChange={(val)=>{
-              setPrice(val)
-             }}
+            onChange={(val) => {
+              setPrice(val);
+            }}
             handleRender={(renderProps) => {
               return (
                 <Tooltip overlay={`$ ${renderProps.props["aria-valuenow"]}`}>
@@ -60,7 +65,28 @@ const ProductSearch = () => {
               );
             }}
           />
-          {price}
+          <hr className="mt-3" />
+          <div className="mt-3">
+            <h3>Categories</h3>
+            <ul>
+              {categories.map((data, index) => (
+                <li
+                  key={index}
+                  className="py-1 cursor-pointer hover:text-amazonYellow"
+                  onClick={() => setCategory(data)}
+                >
+                  {data}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <button
+            type="button"
+            onClick={() => setFetchPrice(price)}
+            className="bg-amazonYellow rounded mt-6 p-2"
+          >
+            Filter
+          </button>
         </div>
         <div className="mx-auto max-w-2xl px-4 py-16 xs:px-6 ss:py-24 sm:max-w-7xl md:px-8">
           <div className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:gap-x-6">

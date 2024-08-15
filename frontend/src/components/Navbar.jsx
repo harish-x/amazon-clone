@@ -8,6 +8,7 @@ import {
   empty_cart,
 } from "../utils";
 import Search from "./search/Search";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [screen, setScreen] = useState(true);
@@ -16,13 +17,14 @@ const Navbar = () => {
     if (window.innerWidth < 1060) {
       setScreen(false);
     }
-  
   });
   return (
     <section>
       <nav className="bg-primary flex text-white px-5 font-amazon justify-around w-100 gap-4">
         <div className="img-div w-32 flex items-center justify-start">
-          <img src={amazon_logo} width="100%" className="" alt="" />
+          <Link to="/">
+            <img src={amazon_logo} width="100%" className="" alt="" />
+          </Link>
         </div>
         <div className="location_div items-center hidden md:flex">
           <div className="w-8">
@@ -36,7 +38,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <Search/>
+        <Search />
         {screen ? (
           <div className="items-center justify-between hidden md:flex">
             <div className="flex items-center px-3">

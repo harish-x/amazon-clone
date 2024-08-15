@@ -15,3 +15,18 @@ export const Navlist = [
   "Computers",
   "Books",
 ];
+
+export const categories = [
+  "Electronics",
+  "Mobile Phone",
+  "Laptops",
+  "Accessories",
+  "Headphones",
+  "Food",
+  "Books",
+  "Clothes/Shoes",
+  "Beauty/Health",
+  "Sports",
+  "Outdoor",
+  "Home",
+];
