@@ -14,8 +14,6 @@ const ProductDetails = () => {
   }, []);
   const { product, status, error } = useSelector((state) => state.productState);
 
-  console.log(product?.product?.name);
-
   if (error !== null) {
     toast.error(error);
   }
