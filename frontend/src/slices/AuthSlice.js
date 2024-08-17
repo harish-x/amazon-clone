@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { LoadUser, LoginUser,RegisterUser,Logoutuser,UpdateUser } from "../features/AuthFeatures";
+import {
+  LoadUser,
+  LoginUser,
+  RegisterUser,
+  Logoutuser,
+  UpdateUser,
+  ChangeUserPassword,
+} from "../features/AuthFeatures";
 import { Navigate } from "react-router-dom";
 
 const AuthSlice = createSlice({
@@ -8,8 +15,9 @@ const AuthSlice = createSlice({
   initialState: {
     status: "idle",
     isUpdated: "false",
+    changepaswordStatus:"false",
     isAuthenticated: false,
-    user: [],        
+    user: [],
     error: null,
   },
   reducers: {},
@@ -71,10 +79,19 @@ const AuthSlice = createSlice({
       })
       .addCase(UpdateUser.fulfilled, (state, action) => {
         state.user = [action.payload];
-         state.isUpdated = "successful";
+        state.isUpdated = "successful";
       })
       .addCase(UpdateUser.rejected, (state) => {
-         state.isUpdated = "failed";
+        state.isUpdated = "failed";
+      })
+      .addCase(ChangeUserPassword.pending, (state) => {
+        state.changepaswordStatus = "loading";
+      })
+      .addCase(ChangeUserPassword.fulfilled, (state) => {
+        state.changepaswordStatus = "successful";
+      })
+      .addCase(ChangeUserPassword.rejected, (state) => {
+        state.changepaswordStatus = "failed";
       });
   },
 });

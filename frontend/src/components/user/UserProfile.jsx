@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Spinner from '../spinner/Spinner'
 import { Logoutuser } from "../../features/AuthFeatures";
 import UpdateProfile from "./UpdateProfile";
+import UpdatePassword from "./UpdatePassword";
 
 const UserProfile = () => {
   const { isAuthenticated, user, status } = useSelector((state) => state.AuthState);
   let [isOpen, setIsOpen] = useState(false);
+  const [openpswd,setopenpswd] = useState(false)
   const dispatch = useDispatch()
 
   return (
@@ -45,7 +47,9 @@ const UserProfile = () => {
                     >
                       Log out
                     </button>
-                    <UpdateProfile openstate={isOpen} setOpenstate={setIsOpen } />
+                    <button type="button" className="bg-red-600 p-2 ml-3" onClick={()=>setopenpswd(!openpswd)}>Change password</button>
+                    <UpdateProfile openstate={isOpen} setOpenstate={setIsOpen} />
+                    <UpdatePassword openpswd={openpswd} setopenpswd={setopenpswd}/>
                   </div>
                 );
               })}

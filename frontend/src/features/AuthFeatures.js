@@ -87,3 +87,23 @@ export const UpdateUser = createAsyncThunk(
     }
   }
 );
+
+
+export const ChangeUserPassword = createAsyncThunk(
+  "auth/changeuserpassword",
+  async (data, { rejectWithValue }) => {
+
+    try {
+      const config = {
+        withCredentials: true,
+      };
+      const res = await axios.put(
+        BASEURL + import.meta.env.VITE_CHANGE_PASSWORD,data,
+        config
+      );
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
