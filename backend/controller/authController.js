@@ -1,3 +1,4 @@
+const { runInNewContext } = require("vm");
 const catchAsyncError = require("../middlewares/catchAsyncError");
 const User = require("../models/userModel");
 const sendEmail = require("../utils/email");
@@ -5,12 +6,13 @@ const ErrorHandler = require("../utils/errorHandler");
 const sendToken = require("../utils/jwt");
 const crypto = require("crypto");
 
+
 exports.registerUsers = catchAsyncError(async (req, res, next) => {
   const { name, email, password, role } = req.body;
   let avatar;
+
   if (req.file) {
-    avatar = `${req.protocol}://${req.hostname}:3000/uploads/user/${req.file.originalname}`
-    
+    avatar = `${req.protocol}://${req.hostname}:3000/uploads/user/${req.file.originalname}`;
   }
   const user = await User.create({ name, email, password, avatar, role });
   sendToken(user, 201, res);
@@ -119,16 +121,24 @@ exports.changePassword = catchAsyncError(async (req, res, next) => {
 });
 
 exports.updateProfile = catchAsyncError(async (req, res, next) => {
-  const newUserData = {
+  let newUserData = {
     name: req.body.name,
     email: req.body.email,
   };
-  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-    new: true,
-    runValidators: true,
-  });
-
-  res.status(200).json({ success: true, user });
+ 
+  if (req.file) {    
+    let avatar = `${req.protocol}://${req.hostname}:3000/uploads/user/${req.file.originalname}`; 
+    
+    newUserData.avatar = avatar
+  }
+   console.log(newUserData);
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+      new: true,
+      runValidators: true,
+      upsert: true,
+    });
+    res.status(200).json({ success: true, user });
+  
 });
 // Admin routes
 exports.getAllUsers = catchAsyncError(async (req, res, next) => {
@@ -158,7 +168,7 @@ exports.updateUser = catchAsyncError(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
- 
+
   res.status(200).json({ success: true, user });
 });
 

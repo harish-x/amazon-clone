@@ -64,11 +64,14 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex justify-end items-center">
-            <span>Sign in </span>{" "}
-            <img
+              <span>Sign in </span>{" "}
+              <Link to="/myprofile">
+              <img
               src="https://img.icons8.com/?size=50&id=ov6L0v2AmOuv&format=png&color=ffffff"
               alt=""
             />
+              </Link>
+            
           </div>
         )}
 

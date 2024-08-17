@@ -55,3 +55,35 @@ export const LoadUser = createAsyncThunk(
   }
 );
 
+export const Logoutuser = createAsyncThunk("auth/logout", async (_, { rejectWithValue }) => {
+  try {
+    const res = await axios.post(BASEURL + import.meta.env.VITE_LOGOUT)
+    return res.data
+  } catch (err) {
+    return rejectWithValue(err)
+  }
+})
+
+export const UpdateUser = createAsyncThunk(
+  "auth/updateuser",
+  async (data, { rejectWithValue }) => {
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+        },
+        withCredentials: true,
+      };
+      const res = await axios.put(
+        BASEURL + import.meta.env.VITE_UPDATE_PROFILE,
+        data,
+        config
+      );
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

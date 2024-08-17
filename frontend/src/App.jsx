@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { LoadUser } from "./features/AuthFeatures";
 import UserProfile from "./components/user/UserProfile";
+import ProtectedRouter from "./router/ProtectedRouter";
 
 function App() {
   const dispatch = useDispatch()
@@ -30,7 +31,10 @@ function App() {
             <Route path="/search/:keyword" element={<ProductSearch />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route element={ <ProtectedRouter/>}>
+              
             <Route path='/myprofile' element={<UserProfile/>}/>
+            </Route>
           </Routes>
         </HelmetProvider>
       </Router>

@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { LoadUser, LoginUser,RegisterUser } from "../features/AuthFeatures";
+import { LoadUser, LoginUser,RegisterUser,Logoutuser,UpdateUser } from "../features/AuthFeatures";
+import { Navigate } from "react-router-dom";
 
 const AuthSlice = createSlice({
   name: "auth",
   initialState: {
     status: "idle",
+    isUpdated: "false",
     isAuthenticated: false,
     user: [],        
     error: null,
@@ -39,7 +41,7 @@ const AuthSlice = createSlice({
         state.isAuthenticated = false;
         state.error = action.payload;
       })
-    .addCase(LoadUser.pending, (state) => {
+      .addCase(LoadUser.pending, (state) => {
         state.status = "loading";
       })
       .addCase(LoadUser.fulfilled, (state, action) => {
@@ -47,9 +49,32 @@ const AuthSlice = createSlice({
         state.user = [action.payload];
         state.status = "success";
       })
-      .addCase(LoadUser.rejected, (state, action) => {
+      .addCase(LoadUser.rejected, (state) => {
         state.status = "failed";
         state.isAuthenticated = false;
+      })
+      .addCase(Logoutuser.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(Logoutuser.fulfilled, (state) => {
+        state.isAuthenticated = false;
+        state.user = [null];
+        state.status = "success";
+        Navigate("/");
+        window.location.reload();
+      })
+      .addCase(Logoutuser.rejected, (state) => {
+        state.status = "failed";
+      })
+      .addCase(UpdateUser.pending, (state) => {
+        state.isUpdated = "loading";
+      })
+      .addCase(UpdateUser.fulfilled, (state, action) => {
+        state.user = [action.payload];
+         state.isUpdated = "successful";
+      })
+      .addCase(UpdateUser.rejected, (state) => {
+         state.isUpdated = "failed";
       });
   },
 });
