@@ -5,12 +5,13 @@ import toast from "react-hot-toast";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { error, status } = useSelector((state) => state.AuthState);
-  const navigate = useNavigate("/");
+  const navigate = useNavigate();
   function handlesubmit(e) {
     e.preventDefault();
     console.log({ email, password });
@@ -23,6 +24,8 @@ const Login = () => {
       .catch((err) => {
         toast.error("login failed", { position: "bottom-center" });
       });
+
+
   }
 
   return (
@@ -46,7 +49,7 @@ const Login = () => {
         />
         {error ? (
           <p className="text-red-700 text-xs mt-3">
-            email or password is already exist
+            email or password is incorrect
           </p>
         ) : null}
         <button

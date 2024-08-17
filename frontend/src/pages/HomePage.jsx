@@ -4,6 +4,9 @@ import Products from "../components/products/Products";
 import MetaData from "../components/MetaData";
 
 const HomePage = () => {
+
+  
+  
   return (
     <>
       <MetaData title={"Buy Best products"} />

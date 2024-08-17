@@ -6,7 +6,12 @@ const sendToken = require("../utils/jwt");
 const crypto = require("crypto");
 
 exports.registerUsers = catchAsyncError(async (req, res, next) => {
-  const { name, email, password, avatar, role } = req.body;
+  const { name, email, password, role } = req.body;
+  let avatar;
+  if (req.file) {
+    avatar = `${req.protocol}://${req.hostname}:3000/uploads/user/${req.file.originalname}`
+    
+  }
   const user = await User.create({ name, email, password, avatar, role });
   sendToken(user, 201, res);
 });
