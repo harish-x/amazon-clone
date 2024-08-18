@@ -4,6 +4,7 @@ import Pagination from "react-js-pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProducts } from "../../features/ProductsFeatures";
+import toast from "react-hot-toast";
 
 const imgs = [
   "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
@@ -20,16 +21,19 @@ const Products = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProducts({currentPage}));
+    dispatch(getProducts({ currentPage }));
   }, []);
 
-  const { allproducts, productCount, resPerPage } = useSelector(
+  const { allproducts, productCount, resPerPage, error } = useSelector(
     (state) => state.productsState
   );
+  if (error !== null) {
+   toast.error(error, { position: "bottom-center" });
+  }
   const [currentPage, setCurrentPage] = useState(1);
   const setCurrentPagenum = (pageNo) => {
     setCurrentPage(pageNo);
-    dispatch(getProducts({pageNo}));
+    dispatch(getProducts({ pageNo }));
   };
 
   return (

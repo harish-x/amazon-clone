@@ -9,6 +9,7 @@ import Tooltip from "rc-tooltip";
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
 import { categories } from "../../utils/constants";
+import toast from "react-hot-toast";
 
 const imgs = [
   "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
@@ -24,13 +25,17 @@ const imgs = [
 const ProductSearch = () => {
   const dispatch = useDispatch();
   const { keyword } = useParams();
-  const { allproducts, productCount, resPerPage } = useSelector(
+  const { allproducts, productCount, resPerPage,error } = useSelector(
     (state) => state.productsState
   );
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([1, 1000]);
   const [fetchPrice, setFetchPrice] = useState([]);
   const [category, setCategory] = useState(null);
+
+  if (error !== null) {
+    toast.error(error,{position:"bottom-center"})
+  }
 
   useEffect(() => {
     dispatch(getProducts({ keyword, currentPage, fetchPrice,category }));

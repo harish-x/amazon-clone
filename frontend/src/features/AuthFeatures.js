@@ -17,7 +17,7 @@ export const LoginUser = createAsyncThunk(
       );
       return res.data;
     } catch (err) {
-      return rejectWithValue(err.message);
+      return rejectWithValue(err)
     }
   }
 );

@@ -34,7 +34,7 @@ const Register = () => {
         navigate("/");
       })
       .catch((err) => {
-        toast.error("registered failed", { position: "bottom-center" });
+        toast.error(err.message, { position: "bottom-center" });
       });
   }
 
@@ -76,11 +76,6 @@ const Register = () => {
             onChange={handleAvatar}
             className="border rounded px-3 w-3/4 mt-2 py-2"
           />
-          {error ? (
-            <p className="text-red-700 text-xs mt-3">
-              email or password is already exist
-            </p>
-          ) : null}
           <button
             type="submit"
             className="bg-yellow-300 mt-3 px-3 py-1 w-3/4 rounded-2xl"
