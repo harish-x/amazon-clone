@@ -70,8 +70,6 @@ const AuthSlice = createSlice({
         state.isAuthenticated = false;
         state.user = [null];
         state.status = "success";
-        Navigate("/");
-        window.location.reload();
       })
       .addCase(Logoutuser.rejected, (state) => {
         state.status = "failed";

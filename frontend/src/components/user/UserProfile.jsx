@@ -1,16 +1,33 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Spinner from '../spinner/Spinner'
+import Spinner from "../spinner/Spinner";
 import { Logoutuser } from "../../features/AuthFeatures";
 import UpdateProfile from "./UpdateProfile";
 import UpdatePassword from "./UpdatePassword";
+import { unwrapResult } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
-  const { isAuthenticated, user, status } = useSelector((state) => state.AuthState);
+  const { isAuthenticated, user, status } = useSelector(
+    (state) => state.AuthState
+  );
   let [isOpen, setIsOpen] = useState(false);
-  const [openpswd,setopenpswd] = useState(false)
-  const dispatch = useDispatch()
-
+  const [openpswd, setopenpswd] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  function handlelogout() {
+    dispatch(Logoutuser())
+      .then(unwrapResult)
+      .then(() => {
+        toast.success("loged out successfuly", { position: "bottom-center" });
+        navigate("/");
+        window.location.reload();
+      })
+      .catch(() => {
+        toast.error("logot failed");
+      });
+  }
   return (
     <>
       {status === "loading" ? (
@@ -41,15 +58,24 @@ const UserProfile = () => {
                     >
                       Edit{" "}
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => dispatch(Logoutuser())}
-                    >
+                    <button type="button" onClick={handlelogout}>
                       Log out
                     </button>
-                    <button type="button" className="bg-red-600 p-2 ml-3" onClick={()=>setopenpswd(!openpswd)}>Change password</button>
-                    <UpdateProfile openstate={isOpen} setOpenstate={setIsOpen} />
-                    <UpdatePassword openpswd={openpswd} setopenpswd={setopenpswd}/>
+                    <button
+                      type="button"
+                      className="bg-red-600 p-2 ml-3"
+                      onClick={() => setopenpswd(!openpswd)}
+                    >
+                      Change password
+                    </button>
+                    <UpdateProfile
+                      openstate={isOpen}
+                      setOpenstate={setIsOpen}
+                    />
+                    <UpdatePassword
+                      openpswd={openpswd}
+                      setopenpswd={setopenpswd}
+                    />
                   </div>
                 );
               })}
@@ -57,7 +83,6 @@ const UserProfile = () => {
           )}
         </div>
       )}
-     
     </>
   );
 };

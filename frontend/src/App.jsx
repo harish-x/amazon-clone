@@ -15,6 +15,7 @@ import UserProfile from "./components/user/UserProfile";
 import ProtectedRouter from "./router/ProtectedRouter";
 import ForgotPassword from "./components/user/ForgotPassword";
 import ResetPassword from "./components/user/ResetPassword";
+import AuthExistRouter from "./router/AuthExistRouter";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,13 +32,22 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/search/:keyword" element={<ProductSearch />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+
             <Route element={<ProtectedRouter />}>
               <Route path="/myprofile" element={<UserProfile />} />
             </Route>
-            <Route path="/user/forgot/password" element={<ForgotPassword />} />
-            <Route path="/password/reset/:token" element={<ResetPassword />} />
+            <Route element={<AuthExistRouter />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route
+                path="/user/forgot/password"
+                element={<ForgotPassword />}
+              />
+              <Route
+                path="/password/reset/:token"
+                element={<ResetPassword />}
+              />
+            </Route>
           </Routes>
         </HelmetProvider>
       </Router>

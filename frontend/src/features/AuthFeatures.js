@@ -17,7 +17,7 @@ export const LoginUser = createAsyncThunk(
       );
       return res.data;
     } catch (err) {
-      return rejectWithValue(err)
+      return rejectWithValue(err);
     }
   }
 );
@@ -64,8 +64,15 @@ export const LoadUser = createAsyncThunk(
 export const Logoutuser = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
+    const config = {
+      withCredentials: true,
+    };
     try {
-      const res = await axios.post(BASEURL + import.meta.env.VITE_LOGOUT);
+      const res = await axios.post(
+        BASEURL + import.meta.env.VITE_LOGOUT,
+        {},
+        config
+      );
       return res.data;
     } catch (err) {
       return rejectWithValue(err);
@@ -144,9 +151,9 @@ export const ResetUserPassword = createAsyncThunk(
         withCredentials: true,
       };
       const { password, confirmPassword } = data;
-      console.log(password,confirmPassword);
+      console.log(password, confirmPassword);
       console.log(data);
-      
+
       const res = await axios.post(
         `${BASEURL}api/v1/password/reset/${data.token}`,
         { password, confirmPassword },
