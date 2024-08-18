@@ -13,12 +13,14 @@ import { useDispatch } from "react-redux";
 import { LoadUser } from "./features/AuthFeatures";
 import UserProfile from "./components/user/UserProfile";
 import ProtectedRouter from "./router/ProtectedRouter";
+import ForgotPassword from "./components/user/ForgotPassword";
+import ResetPassword from "./components/user/ResetPassword";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(LoadUser())
-  },[])
+    dispatch(LoadUser());
+  }, []);
   return (
     <>
       <Router>
@@ -31,10 +33,11 @@ function App() {
             <Route path="/search/:keyword" element={<ProductSearch />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route element={ <ProtectedRouter/>}>
-              
-            <Route path='/myprofile' element={<UserProfile/>}/>
+            <Route element={<ProtectedRouter />}>
+              <Route path="/myprofile" element={<UserProfile />} />
             </Route>
+            <Route path="/user/forgot/password" element={<ForgotPassword />} />
+            <Route path="/password/reset/:token" element={<ResetPassword />} />
           </Routes>
         </HelmetProvider>
       </Router>

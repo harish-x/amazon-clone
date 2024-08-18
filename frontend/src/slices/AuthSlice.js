@@ -7,15 +7,17 @@ import {
   Logoutuser,
   UpdateUser,
   ChangeUserPassword,
+  ForgotUserPassword,
+  ResetUserPassword
 } from "../features/AuthFeatures";
-import { Navigate } from "react-router-dom";
 
 const AuthSlice = createSlice({
   name: "auth",
   initialState: {
     status: "idle",
     isUpdated: "false",
-    changepaswordStatus:"false",
+    changepaswordStatus: "false",
+    ForgotPasswordState:"false",
     isAuthenticated: false,
     user: [],
     error: null,
@@ -92,6 +94,25 @@ const AuthSlice = createSlice({
       })
       .addCase(ChangeUserPassword.rejected, (state) => {
         state.changepaswordStatus = "failed";
+      })
+      .addCase(ForgotUserPassword.pending, (state) => {
+        state.ForgotPasswordState = "loading";
+      })
+      .addCase(ForgotUserPassword.fulfilled, (state) => {
+        state.ForgotPasswordState = "Email sent";
+      })
+      .addCase(ForgotUserPassword.rejected, (state) => {
+        state.ForgotPasswordState = "failed";
+      })
+      .addCase(ResetUserPassword.pending, (state) => {
+        state.ForgotPasswordState = "loading";
+      })
+      .addCase(ResetUserPassword.fulfilled, (state) => {
+        state.ForgotPasswordState = "Password has been changed";
+        state.isAuthenticated = true     
+      })
+      .addCase(ResetUserPassword.rejected, (state) => {
+        state.ForgotPasswordState = "Reset password failed";
       });
   },
 });

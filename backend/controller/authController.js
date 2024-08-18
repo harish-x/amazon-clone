@@ -50,10 +50,8 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
   }
   const resetToken = user.getResetToken();
   await user.save({ validateBeforeSave: false });
-  const reseturl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/vi/password/reset/${resetToken}`;
-  const message = `your password reset url is as follows \n\n ${reseturl} \n\n If you have not requested this email,then ignore in.`;
+  const reseturl = `${process.env.FRONTEND_URL}password/reset/${resetToken}`;
+  const message = `your password reset url is as follows \n\n <a href="${reseturl}" target="_blank">click hear<a> \n\n If you have not requested this email,then ignore in.`;
   try {
     sendEmail({
       email: user.email,

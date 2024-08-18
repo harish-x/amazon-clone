@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../../features/AuthFeatures";
 import toast from "react-hot-toast";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 
 const Login = () => {
@@ -47,8 +48,13 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="border rounded px-3 w-3/4 mt-2 py-2"
         />
+        <Link to="/user/forgot/password" className="flex mt-2 w-3/4">
+          <p className="text-xs mt-1 ml-auto hover:text-amazonYellow">
+            Forgot password
+          </p>
+        </Link>
         {error ? (
-          <p className="text-red-700 text-xs mt-3">
+          <p className="text-red-700 text-xs mt-3 ">
             email or password is incorrect
           </p>
         ) : null}
@@ -59,6 +65,11 @@ const Login = () => {
         >
           Continue
         </button>
+        <Link to="/register" className="flex mt-2 w-3/4">
+          <p className="text-xs mt-1 mx-auto hover:text-amazonYellow">
+            Dont have account
+          </p>
+        </Link>
       </form>
     </div>
   );
