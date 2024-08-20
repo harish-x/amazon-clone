@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../../features/ProductFeature";
 import { useParams } from "react-router-dom";
 import Spinner from "../spinner/Spinner";
 import toast from "react-hot-toast";
 import MetaData from "../MetaData";
+import ProductQuantity from "./ProductQuantity";
+import { AddCartItem } from "../../features/CartFeatures";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -16,6 +19,15 @@ const ProductDetails = () => {
 
   if (error !== null) {
     toast.error(error);
+  }
+  const [quantity, setQuantity] = useState();
+
+  const getQuantity = useCallback((data) => {
+    setQuantity(data);
+  });
+  function addtocart(_id) {
+    console.log(_id);
+    dispatch(AddCartItem({ _id, quantity })).then(unwrapResult).then(()=>toast.success("added to cart",{position:"bottom-center"}))
   }
 
   return (
@@ -156,19 +168,23 @@ const ProductDetails = () => {
                   </div>
                 </div>
 
-                <div className="mt-10">
-                  <h3 className="text-sm font-medium text-gray-900">
-                    Highlights
-                  </h3>
-
-                  <div className="mt-4">
-                    <ul
-                      role="list"
-                      className="list-disc space-y-2 pl-4 text-sm"
-                    ></ul>
-                  </div>
+                <div className="mt-4">
+                  <ProductQuantity
+                    stock={product.product.stock}
+                    qunt={getQuantity}
+                  />
                 </div>
-
+                {product.product.stock == 0 && (
+                  <p className="text-red-800">Out of stock</p>
+                )}
+                <button
+                  type="button"
+                  disabled={product.product.stock == 0 ? true : false}
+                  onClick={() => addtocart(product.product._id)}
+                  className=" px-2 py-3 bg-amazonYellow"
+                >
+                  Add to cart
+                </button>
                 <div className="mt-10">
                   <h2 className="text-sm font-medium text-gray-900">Details</h2>
 

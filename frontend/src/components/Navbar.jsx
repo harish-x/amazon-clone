@@ -64,20 +64,20 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex justify-end items-center">
-              <span>Sign in </span>{" "}
-              <Link to="/myprofile">
+            <span>Sign in </span>{" "}
+            <Link to="/myprofile">
               <img
-              src="https://img.icons8.com/?size=50&id=ov6L0v2AmOuv&format=png&color=ffffff"
-              alt=""
-            />
-              </Link>
-            
+                src="https://img.icons8.com/?size=50&id=ov6L0v2AmOuv&format=png&color=ffffff"
+                alt=""
+              />
+            </Link>
           </div>
         )}
-
-        <div className="cart_div w-16">
-          <img src={empty_cart} alt="" />
-        </div>
+        <Link to="/cart">
+          <div className="cart_div w-16">
+            <img src={empty_cart} alt="" />
+          </div>
+        </Link>
       </nav>
       <div className="bg-secondary scroll-container overflow-auto whitespace-nowrap py-2 flex  ">
         {Navlist.map((data) => {

@@ -16,6 +16,7 @@ import ProtectedRouter from "./router/ProtectedRouter";
 import ForgotPassword from "./components/user/ForgotPassword";
 import ResetPassword from "./components/user/ResetPassword";
 import AuthExistRouter from "./router/AuthExistRouter";
+import Cart from "./components/cart/Cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
                 element={<ResetPassword />}
               />
             </Route>
+            <Route path="/cart" element={<Cart/>}/>
           </Routes>
         </HelmetProvider>
       </Router>
