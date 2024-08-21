@@ -17,6 +17,8 @@ import ForgotPassword from "./components/user/ForgotPassword";
 import ResetPassword from "./components/user/ResetPassword";
 import AuthExistRouter from "./router/AuthExistRouter";
 import Cart from "./components/cart/Cart";
+import Shipping from "./components/cart/Shipping";
+import ConfirmOrder from "./components/cart/ConfirmOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +38,8 @@ function App() {
 
             <Route element={<ProtectedRouter />}>
               <Route path="/myprofile" element={<UserProfile />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/order/confirm" element={<ConfirmOrder />} />
             </Route>
             <Route element={<AuthExistRouter />}>
               <Route path="/login" element={<Login />} />
@@ -49,7 +53,7 @@ function App() {
                 element={<ResetPassword />}
               />
             </Route>
-            <Route path="/cart" element={<Cart/>}/>
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </HelmetProvider>
       </Router>

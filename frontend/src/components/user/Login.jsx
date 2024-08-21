@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../../features/AuthFeatures";
 import toast from "react-hot-toast";
@@ -11,18 +11,21 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { error, status } = useSelector((state) => state.AuthState);
+  const { error, status } = useSelector(
+    (state) => state.AuthState
+  );
   const navigate = useNavigate();
+  
   function handlesubmit(e) {
     e.preventDefault();
     console.log({ email, password });
     dispatch(LoginUser({ email, password }))
       .then(unwrapResult)
-      .then((result) => {
+      .then(() => {
         toast.success("logged in successfully", { position: "bottom-center" });
         navigate("/");
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error("login failed", { position: "bottom-center" });
       });
 

@@ -4,22 +4,29 @@ import { AddCartItem } from "../features/CartFeatures";
 const CartSlice = createSlice({
   name: "cart",
   initialState: {
-    items: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : [],
-    product: {},
+    items: JSON.parse(localStorage.getItem("cartItems")) ?? [],
+    shippingInfo: JSON.parse(localStorage.getItem("shippingInfo")) ?? {},
+    priceInfo: JSON.parse(sessionStorage.getItem("priceInfo")) ?? {},
     status: "loading",
   },
   reducers: {
     removeItemFromCart: (state, action) => {
       let deleteditems = state.items.find((i) => i.product !== action.payload);
-       if (!deleteditems) {
-         state.items = [];
-         localStorage.removeItem("cartItems");
-       } else {
-         state.items = [deleteditems];
-         localStorage.setItem("cartItems", JSON.stringify(deleteditems));
-       }
+      if (!deleteditems) {
+        state.items = [];
+        localStorage.removeItem("cartItems");
+      } else {
+        state.items = [deleteditems];
+        localStorage.setItem("cartItems", JSON.stringify(deleteditems));
+      }
+    },
+    addShippingInfo: (state, action) => {
+      localStorage.setItem("shippingInfo", JSON.stringify(action.payload));
+      state.shippingInfo = action.payload;
+    },
+    addPriceInfo: (state, action) => {
+      sessionStorage.setItem("priceInfo", JSON.stringify(action.payload));
+      state.priceInfo = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -30,9 +37,9 @@ const CartSlice = createSlice({
       .addCase(AddCartItem.fulfilled, (state, action) => {
         const item = action.payload;
         if (state.items.length > 1) {
-          const checkexist = state.items?.find(
-            (i) => i.product == item.product
-          );
+          console.log(typeof state.items);
+
+          const checkexist = state.items.find((i) => i.product == item.product);
           if (checkexist) {
             const chekqunt = state.items?.find(
               (i) => i.quantity == item.quantity
@@ -54,6 +61,6 @@ const CartSlice = createSlice({
   },
 });
 
-export const { removeItemFromCart } = CartSlice.actions;
+export const { removeItemFromCart, addShippingInfo, addPriceInfo } = CartSlice.actions;
 
 export default CartSlice.reducer;

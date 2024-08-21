@@ -2,12 +2,12 @@ import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductQuantity from "../products/ProductQuantity";
 import { removeItemFromCart } from "../../slices/CartSlice";
-
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const cartitems = useSelector((state) => state.CartState.items);
   const [quantity, setQuantity] = useState();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const getQuantity = useCallback((data) => {
     setQuantity(data);
   });
@@ -34,6 +34,27 @@ const Cart = () => {
               </div>
             );
           })}
+          <div>
+            <h2>Order summary</h2>
+            <hr />
+            <p>
+              {cartitems.reduce((acc, item) => acc + item.quantity, 0)} units
+            </p>
+            <p>
+              Rs.
+              {cartitems.reduce(
+                (acc, item) => acc + item.quantity * item.price,
+                0
+              )}
+            </p>
+            <button
+              type="button"
+              onClick={() => navigate("/shipping")}
+              className="bg-amazonYellow"
+            >
+              Checkout
+            </button>
+          </div>
         </div>
       ) : (
         <div>
