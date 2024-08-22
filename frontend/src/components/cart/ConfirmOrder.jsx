@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPriceInfo } from "../../slices/CartSlice";
-
+import {useNavigate} from 'react-router-dom'
 const ConfirmOrder = () => {
+  const navigate = useNavigate()
   const { shippingInfo, items: CartItems } = useSelector(
     (state) => state.CartState
   );
@@ -15,7 +16,8 @@ const ConfirmOrder = () => {
     const totalPrice = Number(itemsPrice + shippingPrice + Number(taxprice)).toFixed(2);
     const dispatch = useDispatch()
     const dispatchPrice = () => {
-        dispatch(addPriceInfo({itemsPrice,shippingPrice,taxprice,totalPrice}))
+      dispatch(addPriceInfo({ itemsPrice, shippingPrice, taxprice, totalPrice }))
+      navigate("/order/confirm/payment");
     }
   return (
     <div>

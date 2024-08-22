@@ -19,6 +19,7 @@ import AuthExistRouter from "./router/AuthExistRouter";
 import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
+import Payment from "./components/cart/Payment";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function App() {
               <Route path="/myprofile" element={<UserProfile />} />
               <Route path="/shipping" element={<Shipping />} />
               <Route path="/order/confirm" element={<ConfirmOrder />} />
+              <Route path="order/confirm/payment" element={<Payment/>}/>
             </Route>
             <Route element={<AuthExistRouter />}>
               <Route path="/login" element={<Login />} />
