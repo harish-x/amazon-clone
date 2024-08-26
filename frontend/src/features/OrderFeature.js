@@ -36,3 +36,27 @@ export const confirmOrder = createAsyncThunk(
     }
   }
 );
+
+export const myOrders = createAsyncThunk("/order/myorder", async(_,{rejectWithValue}) => {
+  try {
+    const response = await axios.get(BASEURL + import.meta.env.VITE_MY_ORDER, { withCredentials: true });
+    return response.data
+  } catch (error) {
+    return rejectWithValue(error)
+  }
+})
+
+export const getSingleOrder = createAsyncThunk(
+  "/order/getSingleorder",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        BASEURL + import.meta.env.VITE_SINGLE_ORDER + data,
+        { withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);

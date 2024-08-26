@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { confirmOrder } from "../features/OrderFeature";
+import { confirmOrder, myOrders,getSingleOrder } from "../features/OrderFeature";
 
 const OrderSlice = createSlice({
   name: "order",
   initialState: {
     ConfirmOrder: [],
+    SingleOrder:[],
+    orders: [],
+    status:"idle"
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -15,10 +18,21 @@ const OrderSlice = createSlice({
         localStorage.removeItem("cartItems");
         localStorage.removeItem("shippingInfo");
       })
-      .addCase(confirmOrder.rejected, (state, action) => {
-        console.log(action.error);
+      .addCase(myOrders.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(myOrders.fulfilled, (state, action) => {
+        state.orders = [action.payload]
+        state.status = "success";
+      })
+      .addCase(getSingleOrder.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getSingleOrder.fulfilled, (state, action) => {
+        state.SingleOrder = [action.payload]
+        state.status = "success";
       });
   },
 });
 
-export default OrderSlice.actions;
+export default OrderSlice.reducer;

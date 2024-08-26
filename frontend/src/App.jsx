@@ -20,6 +20,8 @@ import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
 import Payment from "./components/cart/Payment";
+import Myorders from "./components/orders/Myorders";
+import OrderDetails from "./components/orders/OrderDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +43,9 @@ function App() {
               <Route path="/myprofile" element={<UserProfile />} />
               <Route path="/shipping" element={<Shipping />} />
               <Route path="/order/confirm" element={<ConfirmOrder />} />
-              <Route path="order/confirm/payment" element={<Payment/>}/>
+              <Route path="order/confirm/payment" element={<Payment />} />
+              <Route path="/myorders" element={<Myorders />} />
+              <Route path="/detailorder/:id" element={<OrderDetails/>}/>
             </Route>
             <Route element={<AuthExistRouter />}>
               <Route path="/login" element={<Login />} />
