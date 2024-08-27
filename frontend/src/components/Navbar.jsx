@@ -9,10 +9,11 @@ import {
 } from "../utils";
 import Search from "./search/Search";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [screen, setScreen] = useState(true);
-
+const {items} = useSelector((state)=>state.CartState)
   window.addEventListener("resize", () => {
     if (window.innerWidth < 1060) {
       setScreen(false);
@@ -76,11 +77,20 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-        <Link to="/cart">
-          <div className="cart_div w-16">
-            <img src={empty_cart} alt="" />
-          </div>
-        </Link>
+        {items.length < 1 ? (
+          <Link to="/cart">
+            <div className="cart_div w-16">
+              <img src={empty_cart} alt="" />
+            </div>
+          </Link>
+        ) : (
+          <Link to="/cart">
+            <div className="cart_div w-16 relative">
+              <span className=" text-orange-500 absolute rounded-full p-1 top-[10%] left-[40%]">{items.length}</span>
+              <img src={amazon_cart} alt="" />
+            </div>
+          </Link>
+        )}
       </nav>
       <div className="bg-secondary scroll-container  overflow-auto whitespace-nowrap py-2 hidden ss:flex ">
         {screen ? (
