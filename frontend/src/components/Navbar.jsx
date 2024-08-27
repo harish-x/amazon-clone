@@ -17,6 +17,9 @@ const Navbar = () => {
     if (window.innerWidth < 1060) {
       setScreen(false);
     }
+    else {
+      setScreen(true)
+    }
   });
   return (
     <section>
@@ -79,14 +82,25 @@ const Navbar = () => {
           </div>
         </Link>
       </nav>
-      <div className="bg-secondary scroll-container overflow-auto whitespace-nowrap py-2 flex  ">
-        {Navlist.map((data) => {
-          return (
-            <ul key={data} className="text-white  px-2">
-              <li>{data}</li>
+      <div className="bg-secondary scroll-container  overflow-auto whitespace-nowrap py-2 hidden ss:flex ">
+        {screen ? (
+          Navlist.map((data) => {
+            return (
+              <ul key={data} className="text-white mx-1">
+                <li className="overflow-hidden">{data}</li>
+              </ul>
+            );
+          })
+        ) : (
+          <div className="flex mx-1 text-white">
+            <p>Filter by</p>
+            <ul className="flex mx-1">
+              <li className="mx-1">Your Lists</li>
+              <li className="mx-1">Deals</li>
+              <li className="mx-1">Sell</li>
             </ul>
-          );
-        })}
+          </div>
+        )}
       </div>
     </section>
   );
