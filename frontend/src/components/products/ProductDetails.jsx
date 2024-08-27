@@ -27,7 +27,11 @@ const ProductDetails = () => {
   });
   function addtocart(_id) {
     console.log(_id);
-    dispatch(AddCartItem({ _id, quantity })).then(unwrapResult).then(()=>toast.success("added to cart",{position:"bottom-center"}))
+    dispatch(AddCartItem({ _id, quantity }))
+      .then(unwrapResult)
+      .then(() =>
+        toast.success("added to cart", { position: "bottom-center" })
+      );
   }
 
   return (
@@ -77,123 +81,48 @@ const ProductDetails = () => {
                 </li>
               </ol>
             </nav>
-
-            {/* Image gallery */}
-            <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-              <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
+            <div className="mx-auto max-w-2xl grid grid-flow-row grid-rows-1 grid-cols-2 space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+              <div className="">
                 <img
+                  src="https://m.media-amazon.com/images/I/714UFzp5O7L._SX679_.jpg"
                   alt=""
-                  src={product?.product?.images[0]}
-                  className="h-full w-full object-cover object-center"
+                  srcset=""
                 />
               </div>
-              <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-                <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                  <img
-                    alt=""
-                    src={product?.product?.images[1]}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-                <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                  <img
-                    alt=""
-                    src={product?.product?.images[2]}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-              </div>
-              <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-                <img
-                  alt=""
-                  src={product?.product?.images[3]}
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-            </div>
-
-            {/* Product info */}
-            <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-              <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                  {product?.product?.name}
-                </h1>
-              </div>
-
-              {/* Options */}
-              <div className="mt-4 lg:row-span-3 lg:mt-0">
-                <h2 className="sr-only">Product information</h2>
-                <p className="text-3xl tracking-tight text-gray-900">
-                  {product?.product?.price}
+              <div className=" my-auto">
+                <p className="text-3xl py-4">{product.product.name}</p>
+                <p className="text-xl py-4">{product.product.description}</p>
+                {product.product.stock > 1 ? (
+                  <p className="text-green-600 text-xl pt-4">In stock</p>
+                ) : (
+                  <p className="text-red-600 text-xl py-4">Out of stock</p>
+                )}
+                <p className="text-xl py-2 ">
+                  <span className="text-red-500">-50%</span>&nbsp; &#8377;{" "}
+                  {product.product.price}
                 </p>
-
-                {/* Reviews */}
-                {/* <div className="mt-6">
-                <h3 className="sr-only">Reviews</h3>
-                <div className="flex items-center">
-                  <div className="flex items-center">
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        aria-hidden="true"
-                        className={classNames(
-                          reviews.average > rating
-                            ? "text-gray-900"
-                            : "text-gray-200",
-                          "h-5 w-5 flex-shrink-0"
-                        )}
-                      />
-                    ))}
-                  </div>
-                  <p className="sr-only">{reviews.average} out of 5 stars</p>
-                  <a
-                    href={reviews.href}
-                    className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    {reviews.totalCount} reviews
-                  </a>
-                </div>
-              </div> */}
-              </div>
-
-              <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-                {/* Description and details */}
-                <div>
-                  <h3 className="sr-only">Description</h3>
-
-                  <div className="space-y-6">
-                    <p className="text-base text-gray-900">
-                      {product?.product?.description}
-                    </p>
-                  </div>
-                </div>
-
+                <p className="text-gray-500 text-xs">
+                  free delivery over &#8377;500
+                </p>
+                {product.product.price > 500 ? (
+                  <p className="text-xl py-2">Free Delivery</p>
+                ) : (
+                  <p className="text-base py-2">Delivery charge &#8377; 60</p>
+                )}
+                <hr />
                 <div className="mt-4">
                   <ProductQuantity
                     stock={product.product.stock}
                     qunt={getQuantity}
                   />
                 </div>
-                {product.product.stock == 0 && (
-                  <p className="text-red-800">Out of stock</p>
-                )}
                 <button
                   type="button"
-                  disabled={product.product.stock == 0 ? true : false}
                   onClick={() => addtocart(product.product._id)}
-                  className=" px-2 py-3 bg-amazonYellow"
+                  className="bg-yellow-400 mt-5 w-[70%] py-2 rounded-full"
                 >
-                  Add to cart
+                  Add to Cart
                 </button>
-                <div className="mt-10">
-                  <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-                  <div className="mt-4 space-y-6">
-                    <p className="text-sm text-gray-600">
-                      {product?.product?.name}
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
