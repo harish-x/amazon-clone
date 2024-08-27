@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   ban5,
   Gff,
@@ -20,6 +20,7 @@ import { ban6 } from "../utils";
 const Sliders = () => {
   const [imgIndex, setImgIndex] = useState(0);
   const sliderimages = [ban1, ban2, ban3, ban4, ban5, ban6];
+  const [parentHeight, setParentHeight] = useState(0);
 
   const prevImg = () => {
     setImgIndex((index) => {
@@ -34,12 +35,27 @@ const Sliders = () => {
       return index + 1;
     });
   };
+  const parentRef = useRef(null);
+  const childRef = useRef(null);
+  useEffect(() => {
+    if (parentRef.current && childRef.current) {
+      const childRect = childRef.current.getBoundingClientRect();
+      const parentRect = parentRef.current.getBoundingClientRect();
+      setParentHeight(childRect.bottom - parentRect.top);
+    }
+  }, []);
 
+  console.log(parentHeight);
+  
   return (
     <div className="h-auto">
-      <section className="slider-container ">
+      <section
+        className="slider-container overflow-hidden"
+        style={{ height: `${parentHeight}px !important` }}
+        ref={parentRef}
+      >
         <div
-          className="flex  absolute -z-10 overflow-x-hidden "
+          className="flex slider-image-container  absolute -z-10 overflow-x-hidden "
           style={{ zIndex: "-10" }}
         >
           {sliderimages.map((data, index) => {
@@ -50,7 +66,7 @@ const Sliders = () => {
                 id={index}
                 key={index}
                 style={{ translate: `${-100 * imgIndex}%`, zIndex: "100" }}
-                className="slider-image relative flex-grow flex-shrink"
+                className="slider-image relative block w-full h-auto flex-grow flex-shrink"
                 width="100%"
               />
             );
@@ -59,7 +75,7 @@ const Sliders = () => {
         <button
           type="button"
           style={{ zIndex: "10000" }}
-          className=" w-10 relative left-5 top-[20%] z-10 invisible md:visible"
+          className=" w-10 relative left-5  z-10 invisible md:visible"
           onClick={prevImg}
         >
           <img
@@ -69,7 +85,7 @@ const Sliders = () => {
         </button>
         <button
           type="button"
-          className=" w-10 relative top-[20%] left-[90%] invisible md:visible"
+          className=" w-10 relative  left-[93%] pt-20 invisible md:visible"
           onClick={nextImg}
         >
           <img
@@ -77,8 +93,11 @@ const Sliders = () => {
             alt=""
           />
         </button>
-        <div className="grid grid-rows-1 z-20 grid-flow-col relative px-5 left-auto right-auto top-[20%] ss:top-[50%] gap-1 gap-x-4">
-          <div className=" bg-white ">
+        <div
+          className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-4 xl:gap-x-6  relative px-5 left-auto right-auto mt-[20%] ss:mt-[11%] w-full gap-1"
+          ref={childRef}
+        >
+          <div className=" bg-white height">
             <p className="py-2 text-center font-bold text-sm md:text-base">
               Deals on smartphones thet suits your budget
             </p>
@@ -120,9 +139,9 @@ const Sliders = () => {
             <p className="py-2 text-center font-bold text-sm md:text-base">
               Great Freedom Sale | Shop now
             </p>
-            <div className="p-3 ">
-              <div>
-                <img src={Gff} width="100%" alt="" />{" "}
+            <div className="p-3">
+              <div className="flex items-center justify-center">
+                <img src={Gff} width="80%" alt="" />{" "}
               </div>
             </div>
           </div>

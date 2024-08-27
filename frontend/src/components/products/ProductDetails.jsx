@@ -41,7 +41,7 @@ const ProductDetails = () => {
       ) : status === "loading" ? (
         <Spinner />
       ) : status === "success" ? (
-        <div className="bg-white">
+        <div className="bg-white h-[100dvh]">
           <MetaData title={product?.product?.name} />
           <div className="pt-6">
             <nav aria-label="Breadcrumb">

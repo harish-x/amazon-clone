@@ -5,7 +5,7 @@ const ApiFeatures = require("../utils/ApiFeatures");
 const { Mongoose } = require("mongoose");
 
 exports.getProducts = catchAsyncError(async (req, res, next) => {
-  const resPerPage = 2;
+  const resPerPage = 10;
   
   let buildQuery =()=>{
     return new ApiFeatures(ProductModel.find(), req.query).search().filter();

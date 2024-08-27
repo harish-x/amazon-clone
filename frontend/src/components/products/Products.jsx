@@ -28,7 +28,7 @@ const Products = () => {
     (state) => state.productsState
   );
   if (error !== null) {
-   toast.error(error, { position: "bottom-center" });
+    toast.error(error, { position: "bottom-center" });
   }
   const [currentPage, setCurrentPage] = useState(1);
   const setCurrentPagenum = (pageNo) => {
@@ -37,16 +37,18 @@ const Products = () => {
   };
 
   return (
-    <section className="mt-[5%] bg-white">
+    <section className="">
       <div>
-        <div className="mx-auto max-w-2xl px-4 py-16 xs:px-6 ss:py-24 sm:max-w-7xl md:px-8">
-          <h2 className="sr-only">Products</h2>
-
-          <div className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:gap-x-6">
+        <div className="mx-auto max-w-2xl mt-10 py-5 px-4 xs:px-6 sm:max-w-7xl md:px-8">
+          <div
+            className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2
+          sm:grid-cols-4 md:grid-cols-4 xl:gap-x-6 relative px-5 left-auto
+          right-auto w-full gap-1"
+          >
             {allproducts?.message?.map((product, index) => (
               <Link key={index} to={`/product/${product._id}`}>
-                <div className="group">
-                  <div className="aspect-h-1 aspect-w-1 w-3/4 overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                <div className="group h-72 bg-white p-5">
+                  <div className="aspect-h-1 mx-auto aspect-w-1 w-3/4 overflow-hidden rounded-lg  xl:aspect-h-8 xl:aspect-w-7">
                     <img
                       alt="ferf"
                       src={imgs[index]}

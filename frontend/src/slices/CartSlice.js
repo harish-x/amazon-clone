@@ -36,22 +36,28 @@ const CartSlice = createSlice({
       })
       .addCase(AddCartItem.fulfilled, (state, action) => {
         const item = action.payload;
-        if (state.items.length > 1) {
-          console.log(typeof state.items);
 
-          const checkexist = state.items.find((i) => i.product == item.product);
+        if (state.items.length > 1) {
+          const checkexist = state.items.find(
+            (i) => i.product === item.product
+          );
           if (checkexist) {
             const chekqunt = state.items?.find(
               (i) => i.quantity == item.quantity
             );
             if (chekqunt) {
-              chekqunt.quantity = item.quantity;
+              chekqunt.quantity += item.quantity;
             }
+          } else {
+            state.items = [...state.items, item];
+            localStorage.setItem("cartItems", JSON.stringify(state.items));
           }
         } else {
+          console.log(item);
           state.items = [...state.items, item];
           localStorage.setItem("cartItems", JSON.stringify(state.items));
         }
+        localStorage.setItem("cartItems", JSON.stringify(state.items));
         state.status = "success";
       })
       .addCase(AddCartItem.rejected, (state, action) => {
@@ -61,6 +67,7 @@ const CartSlice = createSlice({
   },
 });
 
-export const { removeItemFromCart, addShippingInfo, addPriceInfo } = CartSlice.actions;
+export const { removeItemFromCart, addShippingInfo, addPriceInfo } =
+  CartSlice.actions;
 
 export default CartSlice.reducer;
