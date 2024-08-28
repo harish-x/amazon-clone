@@ -11,7 +11,7 @@ export default {
         amazonYellow: "#febd69",
       },
       fontFamily: {
-        // amazon: ["Amazon Ember", "sans-serif"],
+        amazon: ["Amazon Ember", "sans-serif"],
       },
     },
     screens: {

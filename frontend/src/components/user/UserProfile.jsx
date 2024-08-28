@@ -37,40 +37,50 @@ const UserProfile = () => {
           {!isAuthenticated ? (
             <h1 className="text-center text-4xl">Please Login</h1>
           ) : (
-            <div>
+            <div className="flex font-amazon items-center justify-center h-[calc(100vh-7rem)] w-full">
               {user.map((data, index) => {
                 return (
-                  <div key={index}>
+                  <div
+                    className="bg-white w-full flex flex-col relative mx-5 h-3/5 sm:w-1/3"
+                    key={index}
+                  >
                     <img
                       src={
                         data.user.avatar ??
                         "https://cdn-icons-png.flaticon.com/512/10337/10337609.png"
                       }
                       alt="profile"
-                      className="h-24 rounded-s-full"
+                      className="h-24 mx-auto m-2 rounded-s-full"
                     />
-                    <p>{data.user.name}</p>
-                    <p>{data.user.email}</p>
+                    <p className="mt-2 self-center">{data.user.name}</p>
+                    <p className="mt-2 self-center">Email: {data.user.email}</p>
                     <button
                       type="button"
-                      className="bg-green-500 p-3"
+                      className=" w-[80%] self-center bg-gray-100 rounded-full mt-3 p-3"
                       onClick={() => setIsOpen(!isOpen)}
                     >
-                      Edit{" "}
-                    </button>
-                    <button type="button" onClick={handlelogout}>
-                      Log out
+                      Update your details
                     </button>
                     <button
                       type="button"
-                      className="bg-red-600 p-2 ml-3"
+                      className="border px-3 self-center rounded-full w-[80%] mt-3 p-3"
                       onClick={() => setopenpswd(!openpswd)}
                     >
                       Change password
                     </button>
+                    <button
+                      type="button"
+                      className="w-[80%] bg-amazonYellow border rounded-full self-center mt-3 p-3"
+                      onClick={handlelogout}
+                    >
+                      Log out
+                    </button>
+
                     <UpdateProfile
                       openstate={isOpen}
                       setOpenstate={setIsOpen}
+                      username={data.user.name}
+                      usermail={data.user.email}
                     />
                     <UpdatePassword
                       openpswd={openpswd}
