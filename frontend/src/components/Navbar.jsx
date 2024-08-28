@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navlist } from "../utils/constants";
 import {
   amazon_cart,
@@ -14,6 +14,8 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   const [screen, setScreen] = useState(true);
 const {items} = useSelector((state)=>state.CartState)
+  const { isAuthenticated, user } = useSelector((state) => state.AuthState);
+
   window.addEventListener("resize", () => {
     if (window.innerWidth < 1060) {
       setScreen(false);
@@ -55,8 +57,11 @@ const {items} = useSelector((state)=>state.CartState)
             </div>
             <div className="account_div px-3 items-center">
               <div>
-                <p className="text-xs">Hello signin,</p>
+                <Link to="/myprofile">
+                 <p className="text-xs">Hello { isAuthenticated ? user[0].user.name : "sign in"},</p>
                 <p className="text-sm font-bold">Account & Lists</p>
+                </Link>
+               
               </div>
             </div>
             <div className="account_div px-3 items-center">
@@ -67,8 +72,8 @@ const {items} = useSelector((state)=>state.CartState)
             </div>
           </div>
         ) : (
-          <div className="flex justify-end items-center">
-            <span>Sign in </span>{" "}
+          <div className="flex flex-col-reverse justify-end items-center">
+              <span className="text-sm ss:text-base ">{isAuthenticated ? user[0].user.name : "sign in"}</span>
             <Link to="/myprofile">
               <img
                 src="https://img.icons8.com/?size=50&id=ov6L0v2AmOuv&format=png&color=ffffff"
