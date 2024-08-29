@@ -49,28 +49,30 @@ const ProductQuantity = ({ stock, qunt }) => {
     <>
       {stock >= 1 && (
         <div>
-          <h3>Quantity</h3>
-          <button
-            type="button"
-            className="p-1 mr-1"
-            onClick={decrementQuantity}
-          >
-            -
-          </button>
-          <input
-            className="border-2 w-10 outline-none text-center"
-            value={quantity}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            type="text"
-          />
-          <button
-            type="button"
-            onClick={incrementQuantity}
-            className="p-1 ml-1"
-          >
-            +
-          </button>
+          <h3 className="text-center mt-1">Quantity</h3>
+          <div className="mt-1 block h-8 border rounded">
+            <button
+              type="button"
+              className="p-1 px-3 h-8  bg-gray-100"
+              onClick={decrementQuantity}
+            >
+              -
+            </button>
+            <input
+              className="border-2 w-10 h-full outline-none text-center"
+              value={quantity}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type="text"
+            />
+            <button
+              type="button"
+              onClick={incrementQuantity}
+              className="p-1 px-3 h-8 bg-gray-100 "
+            >
+              +
+            </button>
+          </div>
         </div>
       )}
     </>
