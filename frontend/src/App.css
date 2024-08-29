@@ -31,7 +31,6 @@
     transition: translate 300ms ease-in-out;
 }
 body{
-    background-color: #E3E6E6;
     overflow-x: hidden;
 }
 /* .slider-image-container{
