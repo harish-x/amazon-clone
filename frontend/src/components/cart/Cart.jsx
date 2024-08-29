@@ -83,7 +83,7 @@ const Cart = () => {
                   onClick={() => navigate("/shipping")}
                   className="bg-amazonYellow text-white self-center w-full px-4 py-2 rounded mt-2"
                 >
-                  Checkout
+                  Proceed to Buy
                 </button>
               </div>
             </div>

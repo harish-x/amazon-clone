@@ -11,20 +11,29 @@ const Payment = () => {
     shippingInfo,
     priceInfo,
   } = useSelector((state) => state.CartState);
- const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   function orderfunc() {
-    dispatch(confirmOrder({ orderItems, shippingInfo, priceInfo })).then(unwrapResult).then(() => {
-      toast.success("saved")
-      navigate('/')
-    }).catch(() => toast.error("error"))
-    }
-  
-    
+    dispatch(confirmOrder({ orderItems, shippingInfo, priceInfo }))
+      .then(unwrapResult)
+      .then(() => {
+        toast.success("saved");
+        navigate("/");
+      })
+      .catch(() => toast.error("error"));
+  }
+
   return (
-    <div>
-      <h1>Didn't integrate the payment gamtway yet!</h1>
-      <button className="bg-amazonYellow" onClick={orderfunc}>click to save your order</button>
+    <div className="w-full h-[calc(100vh-8rem)] ">
+      <div className="flex flex-col space-x-3 space-y-3">
+        <h1 className="text-2xl">Didn't integrate the payment gamtway yet!</h1>
+        <button
+          className="bg-amazonYellow px-3 py-2 rounded"
+          onClick={orderfunc}
+        >
+          click to save your order
+        </button>
+      </div>
     </div>
   );
 };
