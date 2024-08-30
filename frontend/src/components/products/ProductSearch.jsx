@@ -25,7 +25,7 @@ const imgs = [
 const ProductSearch = () => {
   const dispatch = useDispatch();
   const { keyword } = useParams();
-  const { allproducts, productCount, resPerPage,error } = useSelector(
+  const { allproducts, productCount, resPerPage, error } = useSelector(
     (state) => state.productsState
   );
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,12 +34,12 @@ const ProductSearch = () => {
   const [category, setCategory] = useState(null);
 
   if (error !== null) {
-    toast.error(error,{position:"bottom-center"})
+    toast.error(error, { position: "bottom-center" });
   }
 
   useEffect(() => {
-    dispatch(getProducts({ keyword, currentPage, fetchPrice,category }));
-  }, [currentPage, keyword, fetchPrice,category]);
+    dispatch(getProducts({ keyword, currentPage, fetchPrice, category }));
+  }, [currentPage, keyword, fetchPrice, category]);
 
   const setCurrentPagenum = (pageNo) => {
     setCurrentPage(pageNo);
@@ -49,7 +49,7 @@ const ProductSearch = () => {
   return (
     <section className="mt-[5%] bg-white">
       <h2 className="text-center text-3xl">{keyword}</h2>
-      <div>
+      <div className="flex ">
         <div className="w-1/3 px-5 mt-5">
           <Slider
             range={true}
@@ -114,21 +114,20 @@ const ProductSearch = () => {
             ))}
           </div>
         </div>
-
-        {productCount > 0 && productCount > resPerPage && (
-          <div className="flex justify-center items-center mt-10">
-            <Pagination
-              activePage={currentPage}
-              onChange={setCurrentPagenum}
-              totalItemsCount={productCount}
-              itemsCountPerPage={resPerPage}
-              nextPageText={"Next"}
-              firstPageText={"First"}
-              lastPageText={"Last"}
-            />
-          </div>
-        )}
       </div>
+      {productCount > 0 && productCount > resPerPage && (
+        <div className="flex justify-center items-center mt-10">
+          <Pagination
+            activePage={currentPage}
+            onChange={setCurrentPagenum}
+            totalItemsCount={productCount}
+            itemsCountPerPage={resPerPage}
+            nextPageText={"Next"}
+            firstPageText={"First"}
+            lastPageText={"Last"}
+          />
+        </div>
+      )}
     </section>
   );
 };

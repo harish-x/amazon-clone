@@ -65,8 +65,10 @@ const Navbar = () => {
             </div>
             <div className="account_div px-3 items-center">
               <div>
-                <p className="text-xs">Return,</p>
-                <p className="text-sm font-bold">& Orders</p>
+                <Link to="/myorders">
+                  <p className="text-xs">Return,</p>
+                  <p className="text-sm font-bold">& Orders</p>
+                </Link>
               </div>
             </div>
           </div>
