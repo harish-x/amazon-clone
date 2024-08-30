@@ -48,7 +48,7 @@ const ProductSearch = () => {
   };
 
   return (
-    <section className="mt-[5%] mx-auto max-w-2xl py-5 px-4 xs:px-6 sm:max-w-7xl md:px-8 bg-white">
+    <section className="mt-[5%] mx-auto max-w-2xl py-5 px-4 xs:px-6 sm:max-w-7xl md:px-8">
       <h2 className="text-center text-3xl">{keyword}</h2>
       <div>
         <div className="py-10 block md:hidden">
@@ -174,7 +174,7 @@ const ProductSearch = () => {
         </div>
 
         <div className="mx-auto max-w-2xl px-4 py-16 xs:px-6 ss:py-24 sm:max-w-7xl md:px-8">
-          <div className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-5 xl:gap-x-6">
+          <div className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-x-6">
             {allproducts?.message?.map((product, index) => (
               <Link key={index} to={`/product/${product._id}`}>
                 <div className="group">

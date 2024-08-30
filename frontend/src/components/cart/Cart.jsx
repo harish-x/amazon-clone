@@ -16,7 +16,7 @@ const Cart = () => {
   return (
     <>
       {cartitems.length >= 1 ? (
-        <div className="w-full h-[100vh] relative overflow-y-auto">
+        <div className="w-full bg-gray-50 h-[100vh] relative overflow-y-auto">
           <div className="pb-16">
             {" "}
             <h2 className="text-2xl mt-5 text-center">
