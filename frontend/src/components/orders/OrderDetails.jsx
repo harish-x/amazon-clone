@@ -20,7 +20,7 @@ const OrderDetails = () => {
             const order = orderObj.order;
 
             return (
-              <div className="bg-red-300" key={index}>
+              <div className="" key={index}>
                 <h2 className="text-3xl text-center font-semibold mt-10 w-full">
                   Order Details
                 </h2>
@@ -39,16 +39,16 @@ const OrderDetails = () => {
                     {new Date(order.createdAt).toLocaleString()}
                   </p>
 
-                  <h3>Ordered Products</h3>
+                  <h3 className="font-bold border-b">Ordered Products</h3>
                   {order.orderItems.map((item, itemIndex) => (
                     <div
                       key={itemIndex}
-                      className="flex w-full space-x-10"
+                      className="flex w-full items-center space-x-10"
                       style={{ marginBottom: "10px" }}
                     >
                       <div>
                         <img
-                          src={item.image}
+                          src="https://m.media-amazon.com/images/I/714UFzp5O7L._SX679_.jpg"
                           alt={item.name}
                           style={{ width: "100px" }}
                         />
@@ -67,31 +67,31 @@ const OrderDetails = () => {
                     </div>
                   ))}
                 </div>
-
-                <h3>Shipping Info</h3>
-                <p>
-                  <strong>Address:</strong> {order.shippingInfo.address}
-                </p>
-                <p>
-                  <strong>Country:</strong> {order.shippingInfo.country}
-                </p>
-                <p>
-                  <strong>City:</strong> {order.shippingInfo.city}
-                </p>
-                <p>
-                  <strong>Phone Number:</strong> {order.shippingInfo.phoneNo}
-                </p>
-                <p>
-                  <strong>Postal Code:</strong> {order.shippingInfo.postalCode}
-                </p>
-
-                <h3>User Info</h3>
-                <p>
-                  <strong>Name:</strong> {order.user.name}
-                </p>
-                <p>
-                  <strong>Email:</strong> {order.user.email}
-                </p>
+                <div className="bg-white mx-auto max-w-2xl flex flex-col items-start space-y-3 justify-between rounded py-3 py-1 px-4 xs:px-6 sm:max-w-7xl md:px-24">
+                  <h3 className="font-bold">Shipping Info</h3>
+                  <p>
+                    <strong>Name:</strong> {order.user.name}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {order.user.email}
+                  </p>
+                  <p>
+                    <strong>Address:</strong> {order.shippingInfo.address}
+                  </p>
+                  <p>
+                    <strong>Country:</strong> {order.shippingInfo.country}
+                  </p>
+                  <p>
+                    <strong>City:</strong> {order.shippingInfo.city}
+                  </p>
+                  <p>
+                    <strong>Phone Number:</strong> {order.shippingInfo.phoneNo}
+                  </p>
+                  <p>
+                    <strong>Postal Code:</strong>{" "}
+                    {order.shippingInfo.postalCode}
+                  </p>
+                </div>
               </div>
             );
           })}
