@@ -7,6 +7,7 @@ import UpdatePassword from "./UpdatePassword";
 import { unwrapResult } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { unknownprofile } from "../../utils";
 
 const UserProfile = () => {
   const { isAuthenticated, user, status } = useSelector(
@@ -45,12 +46,9 @@ const UserProfile = () => {
                     key={index}
                   >
                     <img
-                      src={
-                        data.user.avatar ??
-                        "https://cdn-icons-png.flaticon.com/512/10337/10337609.png"
-                      }
+                      src={data.user.avatar ?? unknownprofile}
                       alt="profile"
-                      className="h-24 mx-auto m-2 rounded-s-full"
+                      className="h-24 mx-auto m-2 rounded-full"
                     />
                     <p className="mt-2 self-center">{data.user.name}</p>
                     <p className="mt-2 self-center">Email: {data.user.email}</p>

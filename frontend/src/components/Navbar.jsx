@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navlist } from "../utils/constants";
 import {
   amazon_cart,
   amazon_location,
   amazon_logo,
-  amazon_search,
   empty_cart,
 } from "../utils";
 import Search from "./search/Search";
@@ -13,15 +12,14 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [screen, setScreen] = useState(true);
-const {items} = useSelector((state)=>state.CartState)
+  const { items } = useSelector((state) => state.CartState);
   const { isAuthenticated, user } = useSelector((state) => state.AuthState);
 
   window.addEventListener("resize", () => {
     if (window.innerWidth < 1060) {
       setScreen(false);
-    }
-    else {
-      setScreen(true)
+    } else {
+      setScreen(true);
     }
   });
   return (
@@ -58,10 +56,11 @@ const {items} = useSelector((state)=>state.CartState)
             <div className="account_div px-3 items-center">
               <div>
                 <Link to="/myprofile">
-                 <p className="text-xs">Hello { isAuthenticated ? user[0].user.name : "sign in"},</p>
-                <p className="text-sm font-bold">Account & Lists</p>
+                  <p className="text-xs">
+                    Hello {isAuthenticated ? user[0].user.name : "sign in"},
+                  </p>
+                  <p className="text-sm font-bold">Account & Lists</p>
                 </Link>
-               
               </div>
             </div>
             <div className="account_div px-3 items-center">
@@ -73,7 +72,9 @@ const {items} = useSelector((state)=>state.CartState)
           </div>
         ) : (
           <div className="flex flex-col-reverse justify-end items-center">
-              <span className="text-sm ss:text-base ">{isAuthenticated ? user[0].user.name : "sign in"}</span>
+            <span className="text-sm ss:text-base ">
+              {isAuthenticated ? user[0].user.name : "sign in"}
+            </span>
             <Link to="/myprofile">
               <img
                 src="https://img.icons8.com/?size=50&id=ov6L0v2AmOuv&format=png&color=ffffff"
@@ -91,7 +92,9 @@ const {items} = useSelector((state)=>state.CartState)
         ) : (
           <Link to="/cart">
             <div className="cart_div w-16 relative">
-              <span className=" text-orange-500 absolute rounded-full p-1 top-[10%] left-[40%]">{items.length}</span>
+              <span className=" text-orange-500 absolute rounded-full p-1 top-[10%] left-[40%]">
+                {items.length}
+              </span>
               <img src={amazon_cart} alt="" />
             </div>
           </Link>

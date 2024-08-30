@@ -33,17 +33,17 @@ const Login = () => {
   }
 
   return (
-    <div className="h-[100dvh] w-[100dvw] flex items-center justify-center">
+    <div className="h-[calc(100vh-6rem)] w-[100dvw] font-amazon flex items-center justify-center">
       <form
         onSubmit={handlesubmit}
-        className="flex flex-col items-center justify-center w-1/2 h-1/3 outline-1 border rounded-lg"
+        className="flex flex-col items-center justify-center w-[80vw] sm:w-2/4 md:w-1/4 h-1/3 outline-1 border rounded-lg"
       >
-        <h2>Login</h2>
+        <h2 className="text-2xl py-2">Login</h2>
         <input
           type="email"
           placeholder="email"
           onChange={(e) => setEmail(e.target.value)}
-          className="border rounded px-3 w-3/4 mt-2 py-2"
+          className="border rounded px-3 w-3/4 mt-2 py-2  focus:ring-amazonYellow"
         />
         <input
           type="password"
