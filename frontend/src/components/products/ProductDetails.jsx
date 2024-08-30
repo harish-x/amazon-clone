@@ -109,13 +109,16 @@ const ProductDetails = () => {
                 ) : (
                   <p className="text-base py-2">Delivery charge &#8377; 60</p>
                 )}
-                <hr />
-                <div className="mt-4">
+                    <hr />
+                    <div className="max-w-28">
+                       <div className="mt-4">
                   <ProductQuantity
                     stock={product.product.stock}
                     qunt={getQuantity}
                   />
                 </div>
+                    </div>
+               
                 <button
                   type="button"
                   onClick={() => addtocart(product.product._id)}

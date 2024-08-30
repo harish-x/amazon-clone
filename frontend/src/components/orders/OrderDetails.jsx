@@ -20,41 +20,53 @@ const OrderDetails = () => {
             const order = orderObj.order;
 
             return (
-              <div key={index}>
-                <h2>Order Details</h2>
-                <p>
-                  <strong>Order ID:</strong> {order._id}
-                </p>
-                <p>
-                  <strong>Order Status:</strong> {order.orderStatus}
-                </p>
-                <p>
-                  <strong>Total Price:</strong> ${order.totalPrice}
-                </p>
-                <p>
-                  <strong>Ordered At: </strong>{" "}
-                  {new Date(order.createdAt).toLocaleString()}
-                </p>
+              <div className="bg-red-300" key={index}>
+                <h2 className="text-3xl text-center font-semibold mt-10 w-full">
+                  Order Details
+                </h2>
+                <div className="bg-white mx-auto max-w-2xl flex flex-col items-start space-y-3 justify-between rounded mt-7 py-1 px-4 xs:px-6 sm:max-w-7xl md:px-24">
+                  <p>
+                    <strong>Order ID:</strong> {order._id}
+                  </p>
+                  <p>
+                    <strong>Order Status:</strong> {order.orderStatus}
+                  </p>
+                  <p>
+                    <strong>Total Price:</strong> &#8377; {order.totalPrice}
+                  </p>
+                  <p>
+                    <strong>Ordered At: </strong>{" "}
+                    {new Date(order.createdAt).toLocaleString()}
+                  </p>
 
-                <h3>Order Items</h3>
-                {order.orderItems.map((item, itemIndex) => (
-                  <div key={itemIndex} style={{ marginBottom: "10px" }}>
-                    <p>
-                      <strong>Product Name:</strong> {item.name}
-                    </p>
-                    <p>
-                      <strong>Quantity:</strong> {item.quantity}
-                    </p>
-                    <p>
-                      <strong>Price:</strong> ${item.price}
-                    </p>
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      style={{ width: "100px" }}
-                    />
-                  </div>
-                ))}
+                  <h3>Ordered Products</h3>
+                  {order.orderItems.map((item, itemIndex) => (
+                    <div
+                      key={itemIndex}
+                      className="flex w-full space-x-10"
+                      style={{ marginBottom: "10px" }}
+                    >
+                      <div>
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          style={{ width: "100px" }}
+                        />
+                      </div>
+                      <div>
+                        <p>
+                          <strong>Product Name:</strong> {item.name}
+                        </p>
+                        <p>
+                          <strong>Quantity:</strong> {item.quantity}
+                        </p>
+                        <p>
+                          <strong>Price:</strong> &#8377; {item.price}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
                 <h3>Shipping Info</h3>
                 <p>

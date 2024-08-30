@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RegisterUser } from "../../features/AuthFeatures";
 import { unwrapResult } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
+import { unknownprofile } from "../../utils";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [prevAvatar, setPrevAvatar] = useState(
-    "https://cdn-icons-png.flaticon.com/512/10337/10337609.png"
-  );
+  const [prevAvatar, setPrevAvatar] = useState(unknownprofile);
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const { error, status } = useSelector((state) => state.AuthState);
@@ -43,7 +42,7 @@ const Register = () => {
       <div className="h-[100dvh] w-[100dvw] flex items-center justify-center">
         <form
           onSubmit={handlesubmit}
-          className="flex flex-col items-center justify-center w-1/2 py-3 outline-1 border rounded-lg"
+          className="flex flex-col items-center justify-center w-[80vw] sm:w-2/4 md:w-1/4 py-3 outline-1 border rounded-lg"
         >
           <h2 className="text-3xl">Register</h2>
           <img

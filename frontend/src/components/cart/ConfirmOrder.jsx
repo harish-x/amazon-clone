@@ -49,7 +49,7 @@ const ConfirmOrder = () => {
                 <path d="m9 18 6-6-6-6"></path>
               </svg>
             </li>
-            <li className="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500">
+            <li className="inline-flex items-center text-sm font-semibold text-gray-800 truncate dark:text-neutral-200">
               Check out
               <svg
                 className="shrink-0 mx-2 size-4 text-gray-400 dark:text-neutral-600"
@@ -67,7 +67,7 @@ const ConfirmOrder = () => {
               </svg>
             </li>
             <li
-              className="inline-flex items-center text-sm font-semibold text-gray-800 truncate dark:text-neutral-200"
+              className="flex items-center text-sm text-gray-500 focus:outline-none  dark:text-neutral-500  "
               aria-current="page"
             >
               Payment
