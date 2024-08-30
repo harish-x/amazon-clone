@@ -67,7 +67,7 @@ const OrderDetails = () => {
                     </div>
                   ))}
                 </div>
-                <div className="bg-white mx-auto max-w-2xl flex flex-col items-start space-y-3 justify-between rounded py-3 py-1 px-4 xs:px-6 sm:max-w-7xl md:px-24">
+                <div className="bg-white mx-auto max-w-2xl flex flex-col items-start space-y-3 justify-between rounded py-3] px-4 xs:px-6 sm:max-w-7xl md:px-24">
                   <h3 className="font-bold">Shipping Info</h3>
                   <p>
                     <strong>Name:</strong> {order.user.name}
