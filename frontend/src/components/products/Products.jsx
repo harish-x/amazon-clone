@@ -37,7 +37,7 @@ const Products = () => {
   };
 
   return (
-    <section className="">
+    <section className="bg-gray-50">
       <div>
         <div className="mx-auto max-w-2xl mt-10 py-5 px-4 xs:px-6 sm:max-w-7xl md:px-8">
           <div
