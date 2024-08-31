@@ -24,7 +24,7 @@ const Myorders = () => {
               myorders.length > 0 &&
               myorders[0].orders.map((order, orderIndex) => (
                 <div
-                  className="bg-white mx-auto max-w-2xl flex items-center rounded mt-7 py-1 px-4 xs:px-6 sm:max-w-7xl md:px-24"
+                  className="bg-gray-50 mx-auto max-w-2xl flex items-center rounded mt-7 py-1 px-4 xs:px-6 sm:max-w-7xl md:px-24"
                   key={orderIndex}
                 >
                   <div>

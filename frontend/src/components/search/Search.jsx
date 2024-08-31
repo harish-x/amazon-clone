@@ -14,7 +14,6 @@ const Search = () => {
         <div className="bg-gray-300 px-3 h-full flex rounded-l-md items-center">
           <span className="text-gray-700">All</span>
         </div>
-
         <div className="h-full flex-grow">
           <input
             type="text"

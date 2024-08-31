@@ -19,6 +19,7 @@ import tv3 from "/assets/tv3.jpg";
 import tv4 from "/assets/tv4.jpg";
 import im1 from "/assets/im1.jpg";
 import profileimg from "/assets/unknownprofile.png";
+import ecartimg from "/assets/emptycartimg.svg";
 
 export const ban1 = banner1;
 export const ban2 = banner2;
@@ -41,3 +42,4 @@ export const smarttv3 = tv3;
 export const smarttv4 = tv4;
 export const Gff = im1;
 export const unknownprofile = profileimg
+export const emptycartimg = ecartimg
