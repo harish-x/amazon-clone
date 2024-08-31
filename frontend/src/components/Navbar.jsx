@@ -9,11 +9,18 @@ import {
 import Search from "./search/Search";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Sidebar from "./Sidebar";
 
 const Navbar = () => {
   const [screen, setScreen] = useState(true);
   const { items } = useSelector((state) => state.CartState);
   const { isAuthenticated, user } = useSelector((state) => state.AuthState);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
 
   window.addEventListener("resize", () => {
     if (window.innerWidth < 1060) {
@@ -24,6 +31,7 @@ const Navbar = () => {
   });
   return (
     <section>
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <nav className="bg-primary flex text-white px-5 font-amazon justify-around w-100 gap-4">
         <div className="img-div w-32 flex items-center justify-start">
           <Link to="/">
@@ -73,7 +81,7 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col-reverse justify-end items-center">
+          <div className="hidden ss:flex flex-col-reverse justify-end items-center ">
             <span className="text-sm ss:text-base ">
               {isAuthenticated ? user[0].user.name : "sign in"}
             </span>
@@ -102,7 +110,7 @@ const Navbar = () => {
           </Link>
         )}
       </nav>
-      <div className="bg-secondary scroll-container  overflow-auto whitespace-nowrap py-2 hidden ss:flex ">
+      <div className="bg-secondary scroll-container  overflow-auto whitespace-nowrap py-2 flex ">
         {screen ? (
           Navlist.map((data) => {
             return (
@@ -113,6 +121,17 @@ const Navbar = () => {
           })
         ) : (
           <div className="flex mx-1 text-white">
+            <button
+              type="button"
+              className="w-6 mx-1 mr-1"
+              onClick={toggleSidebar}
+            >
+              <img
+                src="https://img.icons8.com/?size=100&id=8113&format=png&color=ffffff"
+                className="object-contain w-full h-full"
+                alt=""
+              />
+            </button>
             <p>Filter by</p>
             <ul className="flex mx-1">
               <li className="mx-1">Your Lists</li>
@@ -122,6 +141,23 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      {!screen && (
+        <div>
+          <div className="bg-white scroll-container  overflow-auto whitespace-nowrap py-2 flex ">
+            <div className="flex space-x-5 mx-2">
+              {Array.from({ length: 8 }).map((_, i) => (
+              <img
+                src={`/assets/category/${i + 1}.jpg`}
+                alt=""
+                className="w-[50px]"
+                />
+                
+              ))}
+            </div>
+            
+          </div>
+        </div>
+      )}
     </section>
   );
 };

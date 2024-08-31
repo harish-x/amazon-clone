@@ -33,6 +33,7 @@ const ProductSearch = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [fetchPrice, setFetchPrice] = useState([]);
   const [category, setCategory] = useState(null);
+  
 
   if (error !== null) {
     toast.error(error, { position: "bottom-center" });
@@ -185,11 +186,11 @@ const ProductSearch = () => {
                       className="h-full w-full object-cover object-center group-hover:opacity-75"
                     />
                   </div>
-                  <h3 className="mt-4 text-sm mx-auto text-gray-700">
+                  <h3 className="mt-4 text-sm mx-auto text-center text-gray-700">
                     {product.name}
                   </h3>
-                  <p className="mt-1 text-lg font-medium text-gray-900">
-                    {product.price}
+                  <p className="mt-1 text-lg text-center font-medium text-gray-900">
+                    &#8377; {product.price}
                   </p>
                 </div>
               </Link>
@@ -202,7 +203,7 @@ const ProductSearch = () => {
           <Pagination
             innerClass="bg-white inline-flex -space-x-px text-sm rounded"
             activeClass="bg-yellow-300 text-white px-2"
-            itemClass="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            itemClass="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
             activePage={currentPage}
             onChange={setCurrentPagenum}
             totalItemsCount={productCount}

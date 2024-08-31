@@ -2,7 +2,8 @@ import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductQuantity from "../products/ProductQuantity";
 import { removeItemFromCart } from "../../slices/CartSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { emptycartimg } from "../../utils";
 
 const Cart = () => {
   const cartitems = useSelector((state) => state.CartState.items);
@@ -88,8 +89,18 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <div>
-          <h1>Your cart is empty</h1>
+        <div className="h-[calc(100vh-7rem)] w-full flex items-center justify-center">
+          <div className="">
+            <h1 className="text-2xl text-center">Your cart is empty</h1>
+              <img src={emptycartimg} className=" w-full h-full mt-2" alt="" />
+              <Link to="/">
+               <button className="w-full py-2 px-1 rounded-full text-white bg-amazonYellow mt-5">Shop now</button>
+              </Link>
+              <Link to='/login'>
+              <p className="mt-3 text-center underline underline-offset-2 hover:text-amazonYellow">Sign in</p>
+              </Link>
+
+          </div>
         </div>
       )}
     </>
