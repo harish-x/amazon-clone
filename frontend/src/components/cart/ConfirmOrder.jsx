@@ -84,7 +84,7 @@ const ConfirmOrder = () => {
               <div className="h-36">
                 <img
                   src={
-                    "https://m.media-amazon.com/images/I/714UFzp5O7L._SX679_.jpg"
+                    data.image
                   }
                   className="object-contain w-full h-full"
                   alt={data.name}

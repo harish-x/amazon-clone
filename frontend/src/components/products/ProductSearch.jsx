@@ -158,12 +158,12 @@ const ProductSearch = () => {
             Filter
           </button>
           <div className="mt-3">
-            <h3>Categories</h3>
+            <h3 className="font-bold text-sm py-2"> Filter by Categories</h3>
             <ul>
               {categories.map((data, index) => (
                 <li
                   key={index}
-                  className="py-1 cursor-pointer hover:text-amazonYellow"
+                  className="py-1 text-sm cursor-pointer hover:text-amazonYellow"
                   onClick={() => setCategory(data)}
                 >
                   {data}
@@ -178,10 +178,10 @@ const ProductSearch = () => {
             {allproducts?.message?.map((product, index) => (
               <Link key={index} to={`/product/${product._id}`}>
                 <div className="group">
-                  <div className="aspect-h-1 aspect-w-1 w-3/4 mx-auto overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                  <div className="aspect-h-1 aspect-w-1 w-3/4 h-3/4 mx-auto overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                     <img
                       alt="ferf"
-                      src={imgs[index]}
+                      src={product.images[0].image}
                       className="h-full w-full object-cover object-center group-hover:opacity-75"
                     />
                   </div>
@@ -200,6 +200,9 @@ const ProductSearch = () => {
       {productCount > 0 && productCount > resPerPage && (
         <div className="flex justify-center items-center mt-10">
           <Pagination
+            innerClass="bg-white inline-flex -space-x-px text-sm rounded"
+            activeClass="bg-yellow-300 text-white px-2"
+            itemClass="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             activePage={currentPage}
             onChange={setCurrentPagenum}
             totalItemsCount={productCount}

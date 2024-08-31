@@ -48,7 +48,7 @@ const OrderDetails = () => {
                     >
                       <div>
                         <img
-                          src="https://m.media-amazon.com/images/I/714UFzp5O7L._SX679_.jpg"
+                          src={item.image}
                           alt={item.name}
                           style={{ width: "100px" }}
                         />
