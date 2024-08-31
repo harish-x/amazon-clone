@@ -6,16 +6,6 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../../features/ProductsFeatures";
 import toast from "react-hot-toast";
 
-const imgs = [
-  "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-  "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-  "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-  "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-  "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-05.jpg",
-  "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-06.jpg",
-  "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-07.jpg",
-  "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-08.jpg",
-];
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -48,11 +38,11 @@ const Products = () => {
             {allproducts?.message?.map((product, index) => (
               <Link key={index} to={`/product/${product._id}`}>
                 <div className="group h-72 bg-white p-5">
-                  <div className="aspect-h-1 mx-auto aspect-w-1 w-3/4 overflow-hidden rounded-lg  xl:aspect-h-8 xl:aspect-w-7">
+                  <div className="aspect-h-1 mx-auto aspect-w-1 w-3/4 h-3/4 overflow-hidden rounded-lg  xl:aspect-h-8 xl:aspect-w-7">
                     <img
                       alt="ferf"
-                      src={imgs[index]}
-                      className="h-full w-full object-cover object-center group-hover:opacity-75"
+                      src={product.images[0].image}
+                      className="h-full w-full object-contain object-center group-hover:opacity-75"
                     />
                   </div>
                   <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
@@ -66,8 +56,11 @@ const Products = () => {
         </div>
 
         {productCount > 0 && productCount > resPerPage && (
-          <div className="flex justify-center items-center mt-10">
+          <div className="flex justify-center items-center mt-8">
             <Pagination
+              innerClass="bg-white inline-flex -space-x-px text-sm rounded"
+              activeClass="bg-yellow-300 text-white px-2"
+              itemClass="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               activePage={currentPage}
               onChange={setCurrentPagenum}
               totalItemsCount={productCount}

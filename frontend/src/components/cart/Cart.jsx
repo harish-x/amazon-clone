@@ -25,14 +25,12 @@ const Cart = () => {
             {cartitems.map((data, index) => {
               return (
                 <div
-                  className="bg-white mx-auto max-w-2xl flex items-center justify-between rounded mt-7 py-1 px-4 xs:px-6 sm:max-w-7xl md:px-24"
+                  className="bg-white mx-auto max-w-2xl flex-col ss:flex-row flex items-center justify-between rounded mt-7 py-1 px-4 xs:px-6 sm:max-w-7xl md:px-24"
                   key={index}
                 >
                   <div className="h-36">
                     <img
-                      src={
-                        "https://m.media-amazon.com/images/I/714UFzp5O7L._SX679_.jpg"
-                      }
+                      src={data.image}
                       className="object-contain w-full h-full"
                       alt={data.name}
                     />
