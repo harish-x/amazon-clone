@@ -17,7 +17,7 @@ const Myorders = () => {
       {status === "loading" ? (
         <Spinner />
       ) : (
-        <div className="font-amazon">
+        <div className="font-amazon py-10">
           <h1 className="text-3xl text-center font-semibold mt-10 w-full">Your Orders</h1>
           <Link to="/detailorder/:id">
             {myorders &&

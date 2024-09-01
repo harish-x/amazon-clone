@@ -23,7 +23,7 @@ const ConfirmOrder = () => {
     navigate("/order/confirm/payment");
   };
   return (
-    <div className="font-amazon bg-gray-50">
+    <div className="font-amazon py-10 bg-gray-50">
       <div className="pb-16">
         <div className="flex items-center justify-center w-full py-8 ">
           <ol className="flex items-center mb-10 whitespace-nowrap">

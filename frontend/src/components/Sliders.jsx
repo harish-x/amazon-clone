@@ -16,6 +16,9 @@ import { ban3 } from "../utils";
 import { ban2 } from "../utils";
 import { ban1 } from "../utils";
 import { ban6 } from "../utils";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Sliders = () => {
   const [imgIndex, setImgIndex] = useState(0);
@@ -45,12 +48,20 @@ const Sliders = () => {
     }
   }, []);
 
-  console.log(parentHeight);
-  
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  };
   return (
     <div className="h-auto">
       <section
-        className="slider-container overflow-hidden"
+        className="slider-container hidden sm:block overflow-hidden"
         style={{ height: `${parentHeight}px !important` }}
         ref={parentRef}
       >
@@ -165,6 +176,13 @@ const Sliders = () => {
             </div>
           </div>
         </div>
+      </section>
+      <section className="block sm:hidden overflow-hidden">
+        <Slider {...settings}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <img src={`/assets/slider/${i+1}.jpg`} alt="" className=""/>
+          ))}
+        </Slider>
       </section>
     </div>
   );
