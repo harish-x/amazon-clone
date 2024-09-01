@@ -7,6 +7,7 @@ const Search = () => {
   const [searchTxt, setSearchTxt] = useState();
   const SearchHandler = () => {
     navigate(`/search/${searchTxt}`);
+    setSearchTxt('')
   };
   return (
     <div className=" items-center flex flex-grow">
