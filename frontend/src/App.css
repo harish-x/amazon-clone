@@ -28,7 +28,7 @@
 }
 
 .slider-image{
-    transition: translate 300ms ease-in-out;
+    transition: transform 300ms ease-in-out;
 }
 body{
     overflow-x: hidden;

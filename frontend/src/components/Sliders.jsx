@@ -66,22 +66,21 @@ const Sliders = () => {
         ref={parentRef}
       >
         <div
-          className="flex slider-image-container  absolute -z-10 overflow-x-hidden "
-          style={{ zIndex: "-10" }}
+          className="flex slider-image-container absolute w-full h-full"
+          style={{
+            transform: `translateX(${-100 * imgIndex}%)`,
+            transition: "transform 0.7s ease-in-out"
+          }}
         >
-          {sliderimages.map((data, index) => {
-            return (
-              <img
-                src={data}
-                alt=""
-                id={index}
-                key={index}
-                style={{ translate: `${-100 * imgIndex}%`, zIndex: "100" }}
-                className="slider-image relative block w-full h-auto flex-grow flex-shrink"
-                width="100%"
-              />
-            );
-          })}
+          {sliderimages.map((data, index) => (
+            <img
+              src={data}
+              alt=""
+              key={index}
+              className="slider-image block w-full object-cover"
+              style={{ flex: "0 0 100%" }}
+            />
+          ))}
         </div>
         <button
           type="button"
@@ -105,7 +104,7 @@ const Sliders = () => {
           />
         </button>
         <div
-          className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-4 xl:gap-x-6  relative px-5 left-auto right-auto mt-[20%] ss:mt-[11%] w-full gap-1"
+          className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-4 xl:gap-x-6  relative px-5 left-auto right-auto mt-[17%]  w-full gap-1"
           ref={childRef}
         >
           <div className=" bg-white height">
@@ -180,7 +179,16 @@ const Sliders = () => {
       <section className="block sm:hidden overflow-hidden">
         <Slider {...settings}>
           {Array.from({ length: 5 }).map((_, i) => (
+<<<<<<< HEAD
             <img src={`/assets/slider/${i+1}.jpg`} alt="" className=""/>
+=======
+            <img
+              src={`/assets/slider/${i + 1}.jpg`}
+              key={i}
+              alt=""
+              className=""
+            />
+>>>>>>> hotfix
           ))}
         </Slider>
       </section>
