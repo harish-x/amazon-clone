@@ -104,9 +104,9 @@ const ConfirmOrder = () => {
         style={{ backgroundColor: "#FCF5EE", border: "1px solid #FBD8B4" }}
       >
         <p className="font-bold justify-self-start">Delivery Address</p>
-        {Object.entries(shippingInfo).map(([key, val], i) => {
+        {Object.entries(shippingInfo).map(([key, val]) => {
           return (
-            <div className="mx-auto flex " key={i}>
+            <div className="mx-auto flex " key={key}>
               <p className="font-bold">{key}: &nbsp;</p>
               <p>{val}</p>
             </div>
