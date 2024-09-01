@@ -104,7 +104,7 @@ const Sliders = () => {
           />
         </button>
         <div
-          className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-4 xl:gap-x-6  relative px-5 left-auto right-auto mt-[17%]  w-full gap-1"
+          className="grid grid-cols-1 gap-x-3 gap-y-5 xs:grid-cols-2 sm:grid-cols-4 md:grid-cols-4 xl:gap-x-6  relative px-5 left-auto right-auto mt-[17%] lg:mt-[18%] lx:mt-[20%] w-full gap-1"
           ref={childRef}
         >
           <div className=" bg-white height">
