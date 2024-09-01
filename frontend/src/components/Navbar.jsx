@@ -1,28 +1,48 @@
-import React, { useState } from "react";
-import {Navlist} from '../utils/constants'
+import React, { useEffect, useState } from "react";
+import { Navlist } from "../utils/constants";
 import {
   amazon_cart,
   amazon_location,
   amazon_logo,
-  amazon_search,
   empty_cart,
 } from "../utils";
-
+import Search from "./search/Search";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Sidebar from "./Sidebar";
 
 const Navbar = () => {
-  const [screen, setScreen] = useState(true);
+  const [screen, setScreen] = useState(window.innerWidth < 1060 ? false : true);
+  const { items } = useSelector((state) => state.CartState);
+  const { isAuthenticated, user } = useSelector((state) => state.AuthState);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  window.addEventListener("resize", () => {
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  function resizescreen() {
     if (window.innerWidth < 1060) {
       setScreen(false);
+    } else {
+      setScreen(true);
     }
-    return window.removeEventListener("resize");
-  });
+  }
+  useEffect(() => {
+    window.addEventListener("resize", resizescreen);
+    return () => {
+      window.removeEventListener("resize", resizescreen);
+    };
+  }, []);
+
   return (
     <section>
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <nav className="bg-primary flex text-white px-5 font-amazon justify-around w-100 gap-4">
         <div className="img-div w-32 flex items-center justify-start">
-          <img src={amazon_logo} width="100%" className="" alt="" />
+          <Link to="/">
+            <img src={amazon_logo} width="100%" className="" alt="" />
+          </Link>
         </div>
         <div className="location_div items-center hidden md:flex">
           <div className="w-8">
@@ -35,24 +55,10 @@ const Navbar = () => {
             <p className="text-sm font-bold">Update location</p>
           </div>
         </div>
-
-        <div className=" items-center hidden ss:flex flex-grow">
-          <div className="flex items-center w-full h-10">
-            <div className="bg-gray-300 px-3 h-full flex rounded-l-md items-center">
-              <span className="text-gray-700">All</span>
-            </div>
-            <div className="h-full flex-grow">
-              <input
-                type="text"
-                className="h-full w-full px-2"
-                placeholder="Search Amazon.in"
-              />
-            </div>
-            <div className="w-8 bg-amazonYellow flex items-center h-full rounded-r-md">
-              <img src={amazon_search} width="100%" alt="" />
-            </div>
-          </div>
+        <div className="hidden ss:flex flex-grow ">
+          <Search />
         </div>
+
         {screen ? (
           <div className="items-center justify-between hidden md:flex">
             <div className="flex items-center px-3">
@@ -65,40 +71,102 @@ const Navbar = () => {
             </div>
             <div className="account_div px-3 items-center">
               <div>
-                <p className="text-xs">Hello signin,</p>
-                <p className="text-sm font-bold">Account & Lists</p>
+                <Link to="/myprofile">
+                  <p className="text-xs">
+                    Hello {isAuthenticated ? user[0].user.name : "sign in"},
+                  </p>
+                  <p className="text-sm font-bold">Account & Lists</p>
+                </Link>
               </div>
             </div>
             <div className="account_div px-3 items-center">
               <div>
-                <p className="text-xs">Return,</p>
-                <p className="text-sm font-bold">& Orders</p>
+                <Link to="/myorders">
+                  <p className="text-xs">Return,</p>
+                  <p className="text-sm font-bold">& Orders</p>
+                </Link>
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex justify-end items-center">
-            <span>Sign in </span>{" "}
-            <img
-              src="https://img.icons8.com/?size=50&id=ov6L0v2AmOuv&format=png&color=ffffff"
-              alt=""
-            />
+          <div className="hidden ss:flex flex-col-reverse justify-end items-center ">
+            <span className="text-sm ss:text-base ">
+              {isAuthenticated ? user[0].user.name : "sign in"}
+            </span>
+            <Link to="/myprofile">
+              <img
+                src="https://img.icons8.com/?size=50&id=ov6L0v2AmOuv&format=png&color=ffffff"
+                alt=""
+              />
+            </Link>
           </div>
         )}
-
-        <div className="cart_div w-16">
-          <img src={empty_cart} alt="" />
-        </div>
+        {items.length < 1 ? (
+          <Link to="/cart">
+            <div className="cart_div w-16">
+              <img src={empty_cart} alt="" />
+            </div>
+          </Link>
+        ) : (
+          <Link to="/cart">
+            <div className="cart_div w-16 relative">
+              <span className=" text-orange-500 absolute rounded-full p-1 top-[10%] left-[40%]">
+                {items.length}
+              </span>
+              <img src={amazon_cart} alt="" />
+            </div>
+          </Link>
+        )}
       </nav>
-      <div className="bg-secondary scroll-container overflow-auto whitespace-nowrap py-2 flex  ">
-        {Navlist.map((data) => {
-          return (
-            <ul className="text-white  px-2">
-              <li>{data}</li>
-            </ul>
-          );
-        })}
+      <div className="flex ss:hidden px-5 py-2 bg-primary">
+        <Search></Search>
       </div>
+      <div className="bg-secondary scroll-container  overflow-auto whitespace-nowrap py-2 flex ">
+        {screen ? (
+          Navlist.map((data) => {
+            return (
+              <ul key={data} className="text-white font-semibold font-amazon mx-2 px-2 w-full">
+                <li className="overflow-hidden ">{data}</li>
+              </ul>
+            );
+          })
+        ) : (
+          <div className="flex mx-1 items-center text-white">
+            <button
+              type="button"
+              className="w-6 mx-1 mr-2"
+              onClick={toggleSidebar}
+            >
+              <img
+                src="https://img.icons8.com/?size=100&id=8113&format=png&color=ffffff"
+                className="object-contain w-full h-full"
+                alt=""
+              />
+            </button>
+            <p>Filter by</p>
+            <ul className="flex mx-1">
+              <li className="mx-1">Your Lists</li>
+              <li className="mx-1">Deals</li>
+              <li className="mx-1">Sell</li>
+            </ul>
+          </div>
+        )}
+      </div>
+      {!screen && (
+        <div>
+          <div className="bg-white scroll-container  overflow-auto whitespace-nowrap py-2 flex sm:hidden">
+            <div className="flex space-x-5 mx-2">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <img
+                  src={`/assets/category/${i + 1}.jpg`}
+                  alt=""
+                  className="w-[50px]"
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -10,9 +10,16 @@ const order = require("./routes/order");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+    exposedHeaders: ["set-cookie"],
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
+app.use('/uploads/',express.static(path.join(__dirname,'uploads')))
 dotenv.config({ path: path.join(__dirname, "config", ".env") });
 
 connectDatabase();

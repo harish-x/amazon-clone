@@ -16,7 +16,7 @@ class ApiFeatures {
     const queryStrCopy = { ...this.queryStr };
 
     //remove fields from query
-    const removeFields = ["keyword", "limit", "page"];
+    let removeFields = ["keyword", "limit", "page"];
     removeFields.forEach((field) => delete queryStrCopy[field]);
 
     let queryStr = JSON.stringify(queryStrCopy);
@@ -26,8 +26,8 @@ class ApiFeatures {
   }
   paginate(resPerPage) {
     const currentPage = Number(this.queryStr.page) || 1;
-    const skip = resPerPage * (currentPage -1);
-    this.query.limit(resPerPage).skip(skip)
+    const skip = resPerPage * (currentPage - 1);
+    this.query.limit(resPerPage).skip(skip);
     return this;
   }
 }

@@ -1,10 +1,9 @@
-const products = require("../data/products.json");
+const products = require("../data/moreproduct.json");
 const product = require("../models/ProductModels");
 const dotenv = require("dotenv");
 const path = require("path");
 const connectDatabase = require("../config/database");
 dotenv.config({ path: path.join(__dirname, "..", "config", ".env") });
-
 
 connectDatabase();
 const seedProducts = async () => {
@@ -16,7 +15,7 @@ const seedProducts = async () => {
   } catch (err) {
     console.log(err);
   }
-  process.exit()
+  process.exit();
 };
 
 seedProducts();

@@ -30,8 +30,10 @@
 .slider-image{
     transition: translate 300ms ease-in-out;
 }
-
-.slider-container{
-    height: 60vh;
-    /* width: 100vw; */
+body{
+    overflow-x: hidden;
 }
+/* .slider-image-container{
+    position: relative;
+    display: inline-block;
+} */
