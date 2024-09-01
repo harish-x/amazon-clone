@@ -179,16 +179,12 @@ const Sliders = () => {
       <section className="block sm:hidden overflow-hidden">
         <Slider {...settings}>
           {Array.from({ length: 5 }).map((_, i) => (
-<<<<<<< HEAD
-            <img src={`/assets/slider/${i+1}.jpg`} alt="" className=""/>
-=======
             <img
               src={`/assets/slider/${i + 1}.jpg`}
               key={i}
               alt=""
               className=""
             />
->>>>>>> hotfix
           ))}
         </Slider>
       </section>
