@@ -18,6 +18,7 @@ const ProductDetails = () => {
   useEffect(() => {
     dispatch(getProduct(id));
     window.addEventListener("resize", setwidthfunc);
+    window.scrollTo(0,0)
     return () => {
       window.removeEventListener("resize", setwidthfunc);
     };
@@ -170,12 +171,12 @@ const ProductDetails = () => {
                     free delivery over &#8377;500
                   </p>
                   {product.product.price > 500 ? (
-                    <p className="text-xl py-2">Free Delivery</p>
+                    <p className="text-sm py-2">Free Delivery</p>
                   ) : (
-                    <p className="text-base py-2">Delivery charge &#8377; 60</p>
+                    <p className="text-base tex-sm py-2">Delivery charge &#8377; 60</p>
                   )}
                   <hr />
-                  <div className="max-w-28">
+                  <div className="flex">
                     <div className="mt-4">
                       <ProductQuantity
                         stock={product.product.stock}

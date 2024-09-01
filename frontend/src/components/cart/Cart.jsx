@@ -17,7 +17,7 @@ const Cart = () => {
   return (
     <>
       {cartitems.length >= 1 ? (
-        <div className="w-full bg-gray-50 h-[100vh] relative overflow-y-auto">
+        <div className="w-full bg-gray-50 py-10 relative overflow-y-auto">
           <div className="pb-16">
             {" "}
             <h2 className="text-2xl mt-5 text-center">
@@ -44,7 +44,7 @@ const Cart = () => {
                     <ProductQuantity stock={data.stock} qunt={getQuantity} />
                     <button
                       type="button"
-                      className="bg-red-600 px-3 py-1 rounded-full text-white mt-2"
+                      className="bg-red-500 px-3 py-1 rounded-full text-white mt-2"
                       onClick={() => dispatch(removeItemFromCart(data.product))}
                     >
                       delete

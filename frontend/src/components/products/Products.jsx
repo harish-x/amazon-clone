@@ -55,7 +55,7 @@ const Products = () => {
           </div>
         </div>
         {productCount > 0 && productCount > resPerPage && (
-          <div className="flex justify-center items-center mt-8">
+          <div className="flex justify-center py-3 items-center mt-8">
             <Pagination
               innerClass="bg-white inline-flex -space-x-px text-sm rounded"
               activeClass="bg-yellow-300 text-white px-2"

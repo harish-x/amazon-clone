@@ -9,7 +9,7 @@ const Search = () => {
     navigate(`/search/${searchTxt}`);
   };
   return (
-    <div className=" items-center hidden ss:flex flex-grow">
+    <div className=" items-center flex flex-grow">
       <div className="flex items-center w-full h-10">
         <div className="bg-gray-300 px-3 h-full flex rounded-l-md items-center">
           <span className="text-gray-700">All</span>

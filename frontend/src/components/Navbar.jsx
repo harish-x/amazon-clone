@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navlist } from "../utils/constants";
 import {
   amazon_cart,
@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar";
 
 const Navbar = () => {
-  const [screen, setScreen] = useState(true);
+  const [screen, setScreen] = useState(window.innerWidth < 1060 ? false : true);
   const { items } = useSelector((state) => state.CartState);
   const { isAuthenticated, user } = useSelector((state) => state.AuthState);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -21,14 +21,20 @@ const Navbar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-
-  window.addEventListener("resize", () => {
+  function resizescreen() {
     if (window.innerWidth < 1060) {
       setScreen(false);
     } else {
       setScreen(true);
     }
-  });
+  }
+  useEffect(() => {
+    window.addEventListener("resize", resizescreen);
+    return () => {
+      window.removeEventListener("resize", resizescreen);
+    };
+  }, []);
+
   return (
     <section>
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
@@ -49,8 +55,10 @@ const Navbar = () => {
             <p className="text-sm font-bold">Update location</p>
           </div>
         </div>
+        <div className="hidden ss:flex flex-grow ">
+          <Search />
+        </div>
 
-        <Search />
         {screen ? (
           <div className="items-center justify-between hidden md:flex">
             <div className="flex items-center px-3">
@@ -110,20 +118,23 @@ const Navbar = () => {
           </Link>
         )}
       </nav>
+      <div className="flex ss:hidden px-5 py-2 bg-primary">
+        <Search></Search>
+      </div>
       <div className="bg-secondary scroll-container  overflow-auto whitespace-nowrap py-2 flex ">
         {screen ? (
           Navlist.map((data) => {
             return (
-              <ul key={data} className="text-white mx-1">
-                <li className="overflow-hidden">{data}</li>
+              <ul key={data} className="text-white font-semibold font-amazon mx-2 px-2 w-full">
+                <li className="overflow-hidden ">{data}</li>
               </ul>
             );
           })
         ) : (
-          <div className="flex mx-1 text-white">
+          <div className="flex mx-1 items-center text-white">
             <button
               type="button"
-              className="w-6 mx-1 mr-1"
+              className="w-6 mx-1 mr-2"
               onClick={toggleSidebar}
             >
               <img
@@ -143,18 +154,16 @@ const Navbar = () => {
       </div>
       {!screen && (
         <div>
-          <div className="bg-white scroll-container  overflow-auto whitespace-nowrap py-2 flex ">
+          <div className="bg-white scroll-container  overflow-auto whitespace-nowrap py-2 flex sm:hidden">
             <div className="flex space-x-5 mx-2">
               {Array.from({ length: 8 }).map((_, i) => (
-              <img
-                src={`/assets/category/${i + 1}.jpg`}
-                alt=""
-                className="w-[50px]"
+                <img
+                  src={`/assets/category/${i + 1}.jpg`}
+                  alt=""
+                  className="w-[50px]"
                 />
-                
               ))}
             </div>
-            
           </div>
         </div>
       )}

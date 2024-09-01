@@ -22,6 +22,7 @@ import ConfirmOrder from "./components/cart/ConfirmOrder";
 import Payment from "./components/cart/Payment";
 import Myorders from "./components/orders/Myorders";
 import OrderDetails from "./components/orders/OrderDetails";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ function App() {
             </Route>
             <Route path="/cart" element={<Cart />} />
           </Routes>
+          <Footer/>
         </HelmetProvider>
       </Router>
     </>
