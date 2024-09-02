@@ -50,7 +50,7 @@ const ProductSearch = () => {
 
   return (
     <section className="mt-[5%] mx-auto max-w-2xl py-5 px-4 xs:px-6 sm:max-w-7xl md:px-8">
-      <h2 className="text-center text-3xl">{keyword}</h2>
+      <h2 className="text-center text-3xl">{ keyword !== 'undefined' ? keyword : "Search anything"}</h2>
       <div>
         <div className="py-10 block md:hidden">
           <button
