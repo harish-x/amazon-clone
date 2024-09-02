@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../../features/ProductsFeatures";
 import toast from "react-hot-toast";
 
-
 const Products = () => {
   const dispatch = useDispatch();
 
@@ -47,7 +46,7 @@ const Products = () => {
                   </div>
                   <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
                   <p className="mt-1 text-lg font-medium text-gray-900">
-                    {product.price}
+                    <sup>&#8377</sup> {product.price}
                   </p>
                 </div>
               </Link>
