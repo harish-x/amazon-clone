@@ -34,7 +34,7 @@ jobs:
           DOCKER_BUILDKIT: 1
         run: |
           docker buildx build --push --tag ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-frontend:latest --file frontend/Dockerfile frontend
-          docker buildx build --push --tag ${{ secrets.DOCKER_HUB_PASSWORD }}/amazon-clone-backend:latest --file backend/Dockerfile backend
+          docker buildx build --push --tag ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-backend:latest --file backend/Dockerfile backend
 
       - name: Deploy to Azure VM
         env:
