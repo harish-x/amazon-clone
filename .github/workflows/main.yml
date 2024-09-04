@@ -1,9 +1,9 @@
-name: Deploy MERN App to Azure VM
+name: Deploy Amazon-clone App to Azure VM
 
 on:
   push:
     branches:
-      - release  # Trigger deployment on changes to the release branch
+      - release  
 
 jobs:
   deploy:
