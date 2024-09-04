@@ -3,50 +3,55 @@ name: Deploy MERN App to Azure VM
 on:
   push:
     branches:
-      - release
+      - release # Change this to your branch name if different
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  build_and_deploy:
+    runs-on: [self-hosted, AMAZON-CLONE-VM] # Use your self-hosted runner
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Cache Docker layers
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-
-      - name: Login to Docker Hub
+      - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME}}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD}}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build and push Docker images
-        env:
-          DOCKER_BUILDKIT: 1
         run: |
           docker buildx build --push --tag ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-frontend:latest --file frontend/Dockerfile frontend
-          docker buildx build --push --tag ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-backend:latest --file backend/Dockerfile backend
+          docker buildx build --push --tag ${{ secrets.DOCKER_HUB_USERNAME}}/amazon-clone-backend:latest --file backend/Dockerfile backend
 
       - name: Deploy to Azure VM
-        env:
-          AZURE_SSH_KEY: ${{ secrets.VM_SSH_KEY }}
-          AZURE_SSH_USER: ${{ secrets.VM_SSH_USER }}
-          AZURE_SSH_HOST: ${{ secrets.VM_SSH_HOST }}
-        run: |
-          echo "${AZURE_SSH_KEY}" > /tmp/id_rsa
-          chmod 600 /tmp/id_rsa
-          ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no $AZURE_SSH_USER@$AZURE_SSH_HOST << EOF
-            echo "Pulling latest Docker images and restarting containers..."
-            cd /path/to/your/app
-            docker-compose down
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.VM_SSH_HOST }}
+          username: ${{ secrets.VM_SSH_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            # Create a temporary directory for the deployment
+            mkdir -p /tmp/deploy
+
+            # Copy docker-compose.yml from the GitHub runner to the VM
+            scp -i /tmp/id_rsa docker-compose.yml ${{ secrets.VM_SSH_USER }}@${{ secrets.VM_SSH_HOST }}:/tmp/deploy
+
+            # Change to the deployment directory
+            cd /tmp/deploy
+
+            # Pull the latest Docker images
             docker-compose pull
+
+            # Stop and remove the running containers
+            docker-compose down
+
+            # Start the containers with the latest images
             docker-compose up -d
+
+            # Clean up the temporary directory
+            rm -rf /tmp/deploy
+
