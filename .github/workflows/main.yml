@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_and_deploy:
-    runs-on: [self-hosted, AMAZON-CLONE-VM] # Use your self-hosted runner
+    runs-on: ubuntu-latest # Use your self-hosted runner
 
     steps:
       - name: Checkout code
