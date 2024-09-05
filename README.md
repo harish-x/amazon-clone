@@ -12,7 +12,7 @@ Amazon Clone is a full-stack web application that replicates key features of the
 
 ## Technologies Used
 
-- **Frontend**: React, Redux Toolkit, Vite, CSS
+- **Frontend**: React, Redux Toolkit, Vite, CSS,Tailwind
 - **Backend**: Node.js, Express.js, MongoDB
 - **Deployment**: Azure VM,Docker and github actions
 
@@ -21,7 +21,7 @@ Amazon Clone is a full-stack web application that replicates key features of the
 The frontend connects to backend APIs defined by the following environment variables:
 
 ```plaintext
-VITE_BASE_URL = http:localhost:300
+VITE_BASE_URL = http://localhost:3000
 
 VITE_GET_ALL_PRODUCTS = api/v1/products
 VITE_GET_SINGLE_PRODUCT = api/v1/product/
