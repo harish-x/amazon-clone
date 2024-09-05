@@ -47,5 +47,4 @@ jobs:
           cd /home/azureuser/application/
 
           docker-compose down
-
           docker-compose up -d
