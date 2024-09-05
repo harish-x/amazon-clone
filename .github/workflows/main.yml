@@ -43,6 +43,6 @@ jobs:
         run: |
 
           cd /home/azureuser/application/
-
+          export MONGO_URL=${{ secrets.MONGO_URL }}
           docker-compose down
           docker-compose up -d
