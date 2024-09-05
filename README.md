@@ -47,120 +47,120 @@ Endpoint: GET /api/v1/products
 Description: Fetches all products available in the store.
 
 **Get Single Product**
-Endpoint: GET /api/v1/product/:id
-Description: Fetches details of a single product by its ID.
-Parameters:
+Endpoint: GET /api/v1/product/:id <br />
+Description: Fetches details of a single product by its ID. <br />
+Parameters: <br />
 
-id (string): Product ID.
-**Create Product**
-Endpoint: POST /api/v1/products/new
-Description: Creates a new product.
-Request Body:
+id (string): Product ID.<br />
+**Create Product**<br />
+Endpoint: POST /api/v1/products/new<br />
+Description: Creates a new product.<br />
+Request Body:<br />
 
-name (string): Name of the product.
-price (number): Price of the product.
-description (string): Description of the product.
-category (string): Category of the product.
-stock (number): Stock quantity.
-Update Product
-Endpoint: PUT /api/v1/product/:id
-Description: Updates an existing product by its ID.
-Parameters:
+name (string): Name of the product.<br />
+price (number): Price of the product.<br />
+description (string): Description of the product.<br />
+category (string): Category of the product.<br />
+stock (number): Stock quantity.<br />
+Update Product<br />
+Endpoint: PUT /api/v1/product/:id<br />
+Description: Updates an existing product by its ID.<br />
+Parameters:<br />
 
-id (string): Product ID.
-Request Body:
-Fields to update (e.g., name, price, etc.).
-Delete Product
-Endpoint: DELETE /api/v1/product/:id
-Description: Deletes a product by its ID.
-Parameters:
+id (string): Product ID.<br />
+Request Body:<br />
+Fields to update (e.g., name, price, etc.).<br />
+Delete Product<br />
+Endpoint: DELETE /api/v1/product/:id<br />
+Description: Deletes a product by its ID.<br />
+Parameters:<br />
 
-id (string): Product ID.
-**User APIs**
-**Register User**
-Endpoint: POST /api/v1/register
-Description: Registers a new user.
-Request Body:
+id (string): Product ID.<br />
+**User APIs**<br />
+**Register User**<br />
+Endpoint: POST /api/v1/register<br />
+Description: Registers a new user.<br />
+Request Body:<br />
 
-name (string): User’s name.
-email (string): User’s email.
-password (string): User’s password.
-**Login User**
-Endpoint: POST /api/v1/login
-Description: Logs in a user.
-Request Body:
+name (string): User’s name.<br />
+email (string): User’s email.<br />
+password (string): User’s password.<br />
+**Login User**<br />
+Endpoint: POST /api/v1/login<br />
+Description: Logs in a user.<br />
+Request Body:<br />
 
-email (string): User’s email.
-password (string): User’s password.
-**Forgot Password**
-Endpoint: POST /api/v1/password/forgot
-Description: Initiates password reset for a user.
-Request Body:
+email (string): User’s email.<br />
+password (string): User’s password.<br />
+**Forgot Password**<br />
+Endpoint: POST /api/v1/password/forgot<br />
+Description: Initiates password reset for a user.<br />
+Request Body:<br />
 
-email (string): User’s email.
-**Change Password**
-Endpoint: PUT /api/v1/password/change/:token
-Description: Changes the user’s password using a reset token.
-Parameters:
+email (string): User’s email.<br />
+**Change Password**<br />
+Endpoint: PUT /api/v1/password/change/:token<br />
+Description: Changes the user’s password using a reset token.<br />
+Parameters:<br />
 
-token (string): Password reset token.
-Request Body:
-password (string): New password.
-**Update Profile**
-Endpoint: PUT /api/v1/update/:id
-Description: Updates user profile information.
-Parameters:
+token (string): Password reset token.<br />
+Request Body:<br />
+password (string): New password.<br />
+**Update Profile**<br />
+Endpoint: PUT /api/v1/update/:id<br />
+Description: Updates user profile information.<br />
+Parameters:<br />
 
-id (string): User ID.
-Request Body:
-Fields to update (e.g., name, email).
-**Check User Profile**
-Endpoint: GET /api/v1/myprofile
-Description: Retrieves the logged-in user’s profile.
+id (string): User ID.<br />
+Request Body:<br />
+Fields to update (e.g., name, email).<br />
+**Check User Profile**<br />
+Endpoint: GET /api/v1/myprofile<br />
+Description: Retrieves the logged-in user’s profile.<br />
 
-**Logout**
-Endpoint: GET /api/v1/logout
-Description: Logs out the current user.
+**Logout**<br />
+Endpoint: GET /api/v1/logout<br />
+Description: Logs out the current user.<br />
 
-**Order APIs**
-Create New Order
-Endpoint: POST /api/v1/order/new
-Description: Creates a new order.
-Request Body:
+**Order APIs**<br />
+Create New Order<br />
+Endpoint: POST /api/v1/order/new<br />
+Description: Creates a new order.<br />
+Request Body:<br />
 
-items (array): List of items in the order.
-shippingInfo (object): Shipping details.
-**Get My Orders**
-Endpoint: GET /api/v1/myorders
-Description: Fetches orders for the logged-in user.
+items (array): List of items in the order.<br />
+shippingInfo (object): Shipping details.<br />
+**Get My Orders**<br />
+Endpoint: GET /api/v1/myorders<br />
+Description: Fetches orders for the logged-in user.<br />
 
-**Get Single Order**
-Endpoint: GET /api/v1/order/:id
-Description: Fetches details of a specific order by ID.
-Parameters:
+**Get Single Order**<br />
+Endpoint: GET /api/v1/order/:id<br />
+Description: Fetches details of a specific order by ID.<br />
+Parameters:<br />
 
-id (string): Order ID.
+id (string): Order ID.<br />
 
-**How to Run the Application**
-1.
-  git clone https://github.com/harish-x/amazon-clone
-  cd amazon-clone
+**How to Run the Application** <br />
+1.<br />
+  git clone https://github.com/harish-x/amazon-clone<br />
+  cd amazon-clone<br />
 
-2.Install dependencies:
-  bash
-  Copy code
-  npm install
-  Create a .env file with the required environment variables as shown above.
+2.Install dependencies:<br />
+  bash<br />
+  Copy code<br />
+  npm install<br />
+  Create a .env file with the required environment variables as shown above.<br />
 
-3.Start the development server:
+3.Start the development server:<br />
 
-  bash
-  Copy code
-  npm run dev
+  bash<br />
+  Copy code<br />
+  npm run dev<br />
   
-3.Build the application for production:
+3.Build the application for production:<br />
 
-  bash
+  bash<br />
   Copy code
   npm run build
 4.Preview the production build:
