@@ -41,8 +41,6 @@ jobs:
 
       - name: Pull and deploy Docker containers on self-hosted VM
         run: |
-          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-frontend:latest
-          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-backend:latest
 
           cd /home/azureuser/application/
 
