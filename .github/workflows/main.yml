@@ -44,7 +44,7 @@ jobs:
           docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-frontend:latest
           docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-backend:latest
 
-          cd /application/
+          cd /home/azureuser/application/
 
           docker-compose down
 
