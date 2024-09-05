@@ -50,70 +50,78 @@ Description: Fetches all products available in the store.
 Endpoint: GET /api/v1/product/:id <br />
 Description: Fetches details of a single product by its ID. <br />
 Parameters: <br />
+ &ensp; id (string): Product ID.<br />
 
-id (string): Product ID.<br />
 **Create Product**<br />
 Endpoint: POST /api/v1/products/new<br />
 Description: Creates a new product.<br />
 Request Body:<br />
+ &ensp; name (string): Name of the product.<br />
+ &ensp; price (number): Price of the product.<br />
+ &ensp; description (string): Description of the product.<br />
+ &ensp; category (string): Category of the product.<br />
+ &ensp; stock (number): Stock quantity.<br />
 
-name (string): Name of the product.<br />
-price (number): Price of the product.<br />
-description (string): Description of the product.<br />
-category (string): Category of the product.<br />
-stock (number): Stock quantity.<br />
-Update Product<br />
+**Update Product**<br />
 Endpoint: PUT /api/v1/product/:id<br />
 Description: Updates an existing product by its ID.<br />
 Parameters:<br />
 
-id (string): Product ID.<br />
-Request Body:<br />
-Fields to update (e.g., name, price, etc.).<br />
-Delete Product<br />
+ &ensp; id (string): Product ID.<br />
+ &ensp; Request Body:<br />
+ &ensp; Fields to update (e.g., name, price, etc.).<br />
+  
+**Delete Product**<br />
 Endpoint: DELETE /api/v1/product/:id<br />
 Description: Deletes a product by its ID.<br />
 Parameters:<br />
 
-id (string): Product ID.<br />
+ &ensp; id (string): Product ID.<br />
+ 
 **User APIs**<br />
+
 **Register User**<br />
 Endpoint: POST /api/v1/register<br />
 Description: Registers a new user.<br />
-Request Body:<br />
-
-name (string): User’s name.<br />
-email (string): User’s email.<br />
-password (string): User’s password.<br />
+ &ensp; Request Body:<br />
+  
+ &ensp; name (string): User’s name.<br />
+ &ensp; email (string): User’s email.<br />
+ &ensp; password (string): User’s password.<br />
+ 
 **Login User**<br />
 Endpoint: POST /api/v1/login<br />
 Description: Logs in a user.<br />
 Request Body:<br />
-
-email (string): User’s email.<br />
-password (string): User’s password.<br />
+  
+ &ensp; email (string): User’s email.<br />
+ &ensp; password (string): User’s password.<br />
+ 
 **Forgot Password**<br />
 Endpoint: POST /api/v1/password/forgot<br />
 Description: Initiates password reset for a user.<br />
 Request Body:<br />
 
-email (string): User’s email.<br />
+ &ensp; email (string): User’s email.<br />
+ 
 **Change Password**<br />
 Endpoint: PUT /api/v1/password/change/:token<br />
 Description: Changes the user’s password using a reset token.<br />
 Parameters:<br />
 
-token (string): Password reset token.<br />
-Request Body:<br />
-password (string): New password.<br />
+  &ensp;token (string): Password reset token.<br />
+  &ensp;Request Body:<br />
+  &ensp;password (string): New password.<br />
+  
 **Update Profile**<br />
 Endpoint: PUT /api/v1/update/:id<br />
 Description: Updates user profile information.<br />
 Parameters:<br />
 
-id (string): User ID.<br />
-Request Body:<br />
-Fields to update (e.g., name, email).<br />
+ &ensp; id (string): User ID.<br />
+ &ensp; Request Body:<br />
+ &ensp; Fields to update (e.g., name, email).<br />
+ 
 **Check User Profile**<br />
 Endpoint: GET /api/v1/myprofile<br />
 Description: Retrieves the logged-in user’s profile.<br />
@@ -128,8 +136,9 @@ Endpoint: POST /api/v1/order/new<br />
 Description: Creates a new order.<br />
 Request Body:<br />
 
-items (array): List of items in the order.<br />
-shippingInfo (object): Shipping details.<br />
+ &ensp; items (array): List of items in the order.<br />
+ &ensp; shippingInfo (object): Shipping details.<br />
+ 
 **Get My Orders**<br />
 Endpoint: GET /api/v1/myorders<br />
 Description: Fetches orders for the logged-in user.<br />
