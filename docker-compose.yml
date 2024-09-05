@@ -3,6 +3,8 @@ services:
     container_name: amazon_backend
     restart: unless-stopped
     env_file: ./backend/config/.env
+    environment:
+      - MONGO_URL=${MONGO_URL}
     build:
       context: ./backend
       dockerfile: Dockerfile
