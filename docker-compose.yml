@@ -5,6 +5,8 @@ services:
     env_file: ./backend/config/.env
     environment:
       - MONGO_URL=${MONGO_URL}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
     build:
       context: ./backend
       dockerfile: Dockerfile
