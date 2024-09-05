@@ -3,12 +3,11 @@ name: Deploy MERN App to Azure VM
 on:
   push:
     branches:
-      - release # Change this to your branch name if different
+      - release
 
 jobs:
-  build_and_deploy:
-    runs-on: ubuntu-latest # Use your self-hosted runner
-
+  build:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,33 +24,28 @@ jobs:
       - name: Build and push Docker images
         run: |
           docker buildx build --push --tag ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-frontend:latest --file frontend/Dockerfile frontend
-          docker buildx build --push --tag ${{ secrets.DOCKER_HUB_USERNAME}}/amazon-clone-backend:latest --file backend/Dockerfile backend
+          docker buildx build --push --tag ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-backend:latest --file backend/Dockerfile backend
 
-      - name: Deploy to Azure VM
-        uses: appleboy/ssh-action@v0.1.5
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          host: ${{ secrets.VM_SSH_HOST }}
-          username: ${{ secrets.VM_SSH_USER }}
-          key: ${{ secrets.VM_SSH_KEY }}
-          script: |
-            # Create a temporary directory for the deployment
-            mkdir -p /tmp/deploy
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-            # Copy docker-compose.yml from the GitHub runner to the VM
-            scp -i /tmp/id_rsa docker-compose.yml ${{ secrets.VM_SSH_USER }}@${{ secrets.VM_SSH_HOST }}:/tmp/deploy
+      - name: Pull and deploy Docker containers on self-hosted VM
+        run: |
+          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-frontend:latest
+          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-clone-backend:latest
 
-            # Change to the deployment directory
-            cd /tmp/deploy
+          cd /application/
 
-            # Pull the latest Docker images
-            docker-compose pull
+          docker-compose down
 
-            # Stop and remove the running containers
-            docker-compose down
-
-            # Start the containers with the latest images
-            docker-compose up -d
-
-            # Clean up the temporary directory
-            rm -rf /tmp/deploy
-
+          docker-compose up -d
