@@ -14,6 +14,10 @@ if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object") {
       typeof value === "function" ? () => {} : null;
   }
 }
+if (typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined") {
+  window.__REDUX_DEVTOOLS_EXTENSION__ = () => (next) => (action) =>
+    next(action);
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
