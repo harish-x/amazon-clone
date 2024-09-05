@@ -5,6 +5,13 @@ import AuthSlice from "../slices/AuthSlice";
 import CartSlice from "../slices/CartSlice";
 import OrderSlice from "../slices/OrderSlice";
 
+const disableDevToolsMiddleware = (store) => (next) => (action) => {
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+    delete window.__REDUX_DEVTOOLS_EXTENSION__;
+  }
+  return next(action);
+};
+
 const reducer = combineReducers({
   productsState: productsSlice,
   productState: ProductSlice,
@@ -15,6 +22,8 @@ const reducer = combineReducers({
 
 const store = configureStore({
   reducer,
-  devTools:false
+  devTools: false,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(disableDevToolsMiddleware),
 });
 export default store;
