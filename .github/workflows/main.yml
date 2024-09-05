@@ -44,5 +44,7 @@ jobs:
 
           cd /home/azureuser/application/
           export MONGO_URL=${{ secrets.MONGO_URL }}
+          export SMTP_USER=${{SMTP_USER}}
+          export SMTP_PASSWORD=${SMTP_PASSWORD}
           docker-compose down
           docker-compose up -d
