@@ -1,4 +1,4 @@
-name: Deploy MERN App to Azure VM
+name: Deploy Amazon clone app to Azure VM
 
 on:
   push:
