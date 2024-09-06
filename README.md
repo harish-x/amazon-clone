@@ -151,28 +151,27 @@ Parameters:<br />
 id (string): Order ID.<br />
 
 **How to Run the Application** <br />
-1.<br />
+1.**Download**<br />
   git clone https://github.com/harish-x/amazon-clone<br />
   cd amazon-clone<br />
 
-2.Install dependencies:<br />
+2.**Install dependencies:** <br />
   bash<br />
   Copy code<br />
   npm install<br />
   Create a .env file with the required environment variables as shown above.<br />
 
-3.Start the development server:<br />
-
+3.**Start the development server:** <br />
   bash<br />
   Copy code<br />
   npm run dev<br />
   
-3.Build the application for production:<br />
-
+4.**Build the application for production:** <br />
   bash<br />
   Copy code
   npm run build
-4.Preview the production build:
+  
+5.**Preview the production build:**
 
   bash
   Copy code
