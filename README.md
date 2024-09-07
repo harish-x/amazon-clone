@@ -214,7 +214,7 @@ id (string): Order ID.<br />
 
 # Deployment
 
-To deploy, switch to the release branch, which contains the Docker files, Docker-compose file, and GitHub Actions file. Create an Azure VM and GitHub Actions runner, then configure according to your deployment needs.
+To deploy, switch to the release branch, which contains the **Docker files**, **Docker-compose file**, and **GitHub Actions file**. Create an Azure VM and GitHub Actions runner, then configure according to your deployment needs.
 
 # Contributing
 
