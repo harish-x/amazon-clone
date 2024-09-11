@@ -12,7 +12,7 @@ Amazon Clone is a full-stack web application that replicates key features of the
 
 ## Technologies Used
 
-- **Frontend**: React, Redux Toolkit, Vite, CSS,Tailwind
+- **Frontend**: React, Redux Toolkit, Vite, CSS, Tailwind
 - **Backend**: Node.js, Express.js, MongoDB
 - **Deployment**: Azure VM,Docker and github actions
 
